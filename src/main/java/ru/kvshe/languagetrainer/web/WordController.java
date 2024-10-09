@@ -23,7 +23,6 @@ import ru.kvshe.languagetrainer.util.API;
 public class WordController {
     private final WordService wordService;
 
-
     @Operation(
             summary = "Get all Words",
             description = "Получить страницу со списком всех слов",

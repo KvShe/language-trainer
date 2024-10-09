@@ -1,5 +1,5 @@
 ## Training language
-### Spring Boot, Spring Web, Spring AOP
+### Spring Boot, Spring Web, Spring AOP, Swagger (SpringDoc OpenAPI)
 #### made:
 - реализованы функции:
     - implementation in Spring:
