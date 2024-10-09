@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: language-trainer
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/language_trainer
+    username: postgres
+    password: 123
+  sql:
+    init:
+      mode: always
+  mvc:
+    hidden method:
+      filter:
+        enabled: true

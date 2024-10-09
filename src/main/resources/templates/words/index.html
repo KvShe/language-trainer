@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link media="all" rel="stylesheet" th:href="@{/style.css}" type="text/css">
+    <title>Список слов</title>
+</head>
+<body class="center">
+<header class="header">
+    <a class="header_link" href="/">Главная</a>
+    <a class="header_link" href="/words">Список слов</a>
+</header>
+
+<h1>Список слов</h1>
+<hr/>
+<table>
+    <tr>
+        <th>English</th>
+        <th>Russian</th>
+    </tr>
+    <tr th:each="word : ${words}">
+        <td><a th:href="@{/words/{id}(id=${word.id})}" th:text="${word.english}"></a></td>
+        <td th:text="${word.russian}"></td>
+    </tr>
+</table>
+</body>
+</html>
