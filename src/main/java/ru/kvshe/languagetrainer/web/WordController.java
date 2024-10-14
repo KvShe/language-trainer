@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ru.kvshe.languagetrainer.exception.NotFoundWordException;
 import ru.kvshe.languagetrainer.model.Word;
 import ru.kvshe.languagetrainer.service.WordService;
 import ru.kvshe.languagetrainer.util.API;
@@ -59,7 +60,10 @@ public class WordController {
     @API.NotFoundResponse
     @GetMapping("/{id}")
     public ModelAndView showForm(@PathVariable Long id, Model model) {
-        Word word = wordService.getById(id);
+//        Word word = wordService.getById(id);
+        Word word = wordService.getById(id)
+                .orElseThrow(() -> new NotFoundWordException(id));
+
         model.addAttribute("word", word);
         return new ModelAndView("words/show");
     }
@@ -68,7 +72,10 @@ public class WordController {
     @API.InternalServerError
     @GetMapping("/{id}/edit")
     public ModelAndView showFormEdit(@PathVariable Long id, Model model) {
-        Word word = wordService.getById(id);
+//        Word word = wordService.getById(id);
+        Word word = wordService.getById(id)
+                .orElseThrow(() -> new NotFoundWordException(id));
+
         model.addAttribute(word);
         return new ModelAndView("words/edit");
     }

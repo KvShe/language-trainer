@@ -1,4 +1,4 @@
-## Training language
+## Language Training
 ### Spring Boot, Spring Web, Spring AOP, Swagger (SpringDoc OpenAPI)
 #### made:
 - реализованы функции:
@@ -10,6 +10,7 @@
             - update
             - delete
         - показать список всех слов
+  - проверка написанных слов
 - добавлена база данных PostgreSQL
 - добавлено логирование в консоль через Spring AOP & Lombok (пока для класса WordService)
 - добавлен таймер для измерения времени выполнения метода (пока для класса WordService)

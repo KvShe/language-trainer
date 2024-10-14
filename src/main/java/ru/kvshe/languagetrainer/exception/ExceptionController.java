@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
 public class ExceptionController {
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(NotFoundWordException.class)
     public ModelAndView exceptionHandler() {
         return new ModelAndView("exceptions/oops", HttpStatus.BAD_REQUEST);
 //                .addObject("ex", ex.getMessage());
