@@ -9,18 +9,21 @@
     <title>Learn</title>
 </head>
 <body class="center">
+<audio autoplay>
+    <source th:src="@{/correct-answer.mp3}" type="audio/mpeg">
+</audio>
+
 <header class="header">
     <a class="header_link" href="/">Главная</a>
     <a class="header_link" href="/words">Список слов</a>
 </header>
 
-<h1>Language Trainer</h1>
+<h1>Верный ответ</h1>
 <hr/>
-<!--<form class="center_form, content" action="#" th:action="@{/learn}" th:object="${word}" method="post">-->
-<form class="content" action="#" th:action="@{/learn}" th:object="${word}" method="post">
-    <label for="english" th:text="${word.russian}"/>
-    <input type="text" th:field="*{english}" id="english" placeholder="Перевод" autocomplete="off" autofocus>
-    <input type="submit" value="Проверить">
+<!--<form class="center_form" action="#" th:action="@{/learn/show}" th:object="${word}" method="get">-->
+<form class="content" action="#" th:action="@{/learn/show}" th:object="${word}" method="get">
+    <p><label th:text="${word}"/></p>
+    <p><input type="submit" value="Продолжить" autofocus></p>
 </form>
 
 

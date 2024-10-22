@@ -16,12 +16,12 @@
 
 <h1>Список слов</h1>
 <hr/>
-<table>
+<table class="center">
     <tr>
         <th>English</th>
         <th>Russian</th>
     </tr>
-    <tr th:each="word : ${words}">
+    <tr class="content" th:each="word : ${words}">
         <td><a th:href="@{/words/{id}(id=${word.id})}" th:text="${word.english}"></a></td>
         <td th:text="${word.russian}"></td>
     </tr>

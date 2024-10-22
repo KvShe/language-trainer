@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.stereotype.Service;
 import ru.kvshe.languagetrainer.model.Word;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -14,19 +15,34 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LearnService {
     private final WordService wordService;
-    private List<Word> words;
+    private List<Word> words = new ArrayList<>();
 //    private List<Word> errors;
 
     public void createListOfWords() {
         words = wordService.getAll();
     }
 
-    public void checkWord(Word word) {
-        if (!words.getFirst().getEnglish().equals(word.getEnglish())) {
+    public boolean checkWord(Word word) {
+        // переводит строки в нижний регистр, убирает все символы, кроме латиницы и сравнивает
+        boolean result = util(word).getEnglish().equals(util(words.getFirst()).getEnglish());
+
+        if (!result) {
             word = words.getFirst();
             words.add(word);
         }
 
         words.removeFirst();
+
+        return result;
+    }
+
+    private Word util(Word word) {
+        word.setEnglish(
+                word.getEnglish()
+                        .toLowerCase()
+                        .replaceAll("[^a-z]", "")
+        );
+
+        return word;
     }
 }

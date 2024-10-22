@@ -16,9 +16,9 @@
 
 <h1>Добавление нового слова</h1>
 <hr/>
-<form action="#" th:action="@{/words/new}" th:object="${word}" method="post">
+<form class="center_form" action="#" th:action="@{/words/new}" th:object="${word}" method="post">
     <label for="english">English</label>
-    <input type="text" th:field="*{english}" id="english" placeholder="English">
+    <input type="text" th:field="*{english}" id="english" placeholder="English" autofocus>
     <label for="russian">Russian</label>
     <input type="text" th:field="*{russian}" id="russian" placeholder="Russian">
     <input type="submit" value="Создать">

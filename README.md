@@ -33,8 +33,6 @@
     - by english
     - by russian
 - add words:
-    - implement - осуществлять
-    - execute - выполнять
     - successfully - успешно
     - unable - неспособный
     - properties - характеристики
