@@ -92,7 +92,7 @@
                         </exclude>
 <!--                        <excludeDevtools>true</excludeDevtools>-->
                     </excludes>
-                    <excludeDevtools>true</excludeDevtools> <!--исключает devTools из финального jar-->
+<!--                    <excludeDevtools>true</excludeDevtools> &lt;!&ndash;исключает devTools из финального jar&ndash;&gt;-->
                 </configuration>
             </plugin>
 
