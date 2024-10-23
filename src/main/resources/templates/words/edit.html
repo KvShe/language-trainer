@@ -18,9 +18,9 @@
 <hr/>
 <form class="center_form" action="#" th:action="@{/words/{id}(id=${word.id})}" th:object="${word}" th:method="patch">
     <label for="english">English</label>
-    <input type="text" th:field="*{english}" id="english" placeholder="English" autofocus>
+    <input type="text" th:field="*{english}" id="english" placeholder="English" autocomplete="off" autofocus>
     <label for="russian">Russian</label>
-    <input type="text" th:field="*{russian}" id="russian" placeholder="Russian">
+    <input type="text" th:field="*{russian}" id="russian" placeholder="Russian" autocomplete="off">
     <input type="submit" value="Обновить">
 </form>
 </body>

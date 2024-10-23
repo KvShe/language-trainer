@@ -68,6 +68,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!--test-->
@@ -89,7 +90,7 @@
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                         </exclude>
-                        <excludeDevtools>true</excludeDevtools>
+<!--                        <excludeDevtools>true</excludeDevtools>-->
                     </excludes>
                     <excludeDevtools>true</excludeDevtools> <!--исключает devTools из финального jar-->
                 </configuration>
@@ -106,5 +107,18 @@
             </plugin>
         </plugins>
     </build>
+
+<!--    <profiles>-->
+<!--        <profile>-->
+<!--            <id>dev</id>-->
+<!--            <dependencies>-->
+<!--                <dependency>-->
+<!--                    <groupId>org.springframework.boot</groupId>-->
+<!--                    <artifactId>spring-boot-devtools</artifactId>-->
+<!--                    <scope>runtime</scope>-->
+<!--                </dependency>-->
+<!--            </dependencies>-->
+<!--        </profile>-->
+<!--    </profiles>-->
 
 </project>

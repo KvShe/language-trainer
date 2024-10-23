@@ -24,7 +24,7 @@ public class LearnService {
 
     public boolean checkWord(Word word) {
         // переводит строки в нижний регистр, убирает все символы, кроме латиницы и сравнивает
-        boolean result = util(word).getEnglish().equals(util(words.getFirst()).getEnglish());
+        boolean result = util(word).getEnglish().equals(words.getFirst().getEnglish().toLowerCase());
 
         if (!result) {
             word = words.getFirst();

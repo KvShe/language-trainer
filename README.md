@@ -29,24 +29,24 @@
 - Банк слов, которые давно не проверялись
 - add в меню кнопку выключения приложения
 - add pagination
+  - ленивая загрузка или инфинит скролл (infinite scroll)
+    - при этом новые данные загружаются автоматически,
+    - когда пользователь прокручивает страницу вниз
+  - add elasticsearch - db for logs
+  - add logback - библиотека для логирования
 - add sorts:
     - by english
     - by russian
 - add words:
-    - successfully - успешно
-    - unable - неспособный
-    - properties - характеристики
     - util - использовать
     - example - пример
     - override - переопределить
     - accept - принимать
     - accessed - доступ
     - everything - всё
-    - sender - отправитель
     - invoke - вызывать
     - scope - рамки (зона видимости)
     - lazy - ленивый
-    - property - свойство
     - surname - фамилия
     - whose - чей
     - from - от, из, с
@@ -58,8 +58,6 @@
     - resolve - решать, разрешить
     - sender - отправитель
     - completed - завершённый
-    - receiver - получатель
     - quantity - количество
-    - response - ответ
     - denied - отклонён
     - duration - продолжительность
