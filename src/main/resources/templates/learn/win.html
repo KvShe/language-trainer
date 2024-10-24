@@ -21,7 +21,8 @@
 <h1>Language Trainer</h1>
 <hr/>
 <form class="content" action="#" th:action="@{/}" method="get">
-    <p class="content">Вы прошли урок!</p>
+    <p th:text="'Ваш результат ' + ${count} + '%!'"></p>
+<!--    <p class="content">Вы прошли урок!</p>-->
     <input type="submit" value="Продолжить" autofocus>
 </form>
 </body>

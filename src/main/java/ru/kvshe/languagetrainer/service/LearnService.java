@@ -19,8 +19,9 @@ public class LearnService {
     private List<Word> words = new ArrayList<>();
 //    private List<Word> errors;
 
-    public void createListOfWords() {
+    public List<Word> createListOfWords() {
         words = wordService.getAll();
+        return words;
     }
 
     public boolean checkWord(Word word) {

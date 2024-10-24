@@ -19,19 +19,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LearnController {
     private final LearnService learnService;
+    private int correctAnswers;
+    private int wrongAnswers;
 
     @Operation(
             summary = "Получить список слов",
-            description = "Формирует список слов для обучения и возвращает страницу с проверкой первого слова"
-    )
+            description = "Формирует список слов для обучения и возвращает страницу с проверкой первого слова")
     @GetMapping
     public ModelAndView learn(Word word) {
-        List<Word> words = learnService.getWords();
-        learnService.createListOfWords(); // todo создавать список слов, которые давно не проверялись
+        List<Word> words = learnService.createListOfWords();// todo создавать список слов, которые давно не проверялись
 
-        Collections.shuffle(learnService.getWords());
+        Collections.shuffle(words);
 
-        word.setRussian(learnService.getWords().getFirst().getRussian());
+        word.setRussian(words.getFirst().getRussian());
         return new ModelAndView("learn/show")
                 .addObject("word", word);
     }
@@ -42,13 +42,17 @@ public class LearnController {
 
         if (!words.isEmpty()) {
             word.setRussian(learnService.getWords().getFirst().getRussian());
-//            word.setEnglish(null);
-//            return new ModelAndView("learn/show", "word", words.getFirst());
-            return new ModelAndView("learn/show", "word", word);
+            return new ModelAndView("learn/show")
+                    .addObject("word", word);
         }
 
-//        return new ModelAndView("redirect:/words");
-        return new ModelAndView("redirect:/learn/win");
+        // fixme оптимизировать возвращение на page эффективность прохождения урока в %: quantity слов & quantity попыток
+        float result = ((float) correctAnswers / (wrongAnswers + correctAnswers)) * 100;
+
+        correctAnswers = 0;
+        wrongAnswers = 0;
+        return new ModelAndView("learn/win")
+                .addObject("count", (int) result);
     }
 
     @PostMapping
@@ -58,33 +62,41 @@ public class LearnController {
 //            return new ModelAndView("redirect:/words");
 //        }
 
-        if (!learnService.checkWord(word)) {
-            return new ModelAndView("redirect:/learn/wrong-answer");
-        } else {
-            return new ModelAndView("redirect:/learn/correct-answer");
+        // protected от случайного нажатия Enter в пустом поле
+        if (word.getEnglish().isEmpty()) {
+            return new ModelAndView("redirect:/learn/show");
         }
 
+        if (!learnService.checkWord(word)) {
+            wrongAnswers++;
+            return new ModelAndView("redirect:/learn/wrong-answer");
+        } else {
+            correctAnswers++;
+            return new ModelAndView("redirect:/learn/correct-answer");
+        }
     }
 
-    /**
-     * Возвращает страницу, сообщающую о неверном переводе слова
-     *
-     * @return wrong-answer.html
-     */
+    @Operation(
+            summary = "Не верный перевод",
+            description = "Возвращает страницу, сообщающую о неверном переводе слова: wrong-answer.html")
     @GetMapping("/wrong-answer")
     public ModelAndView translationError() {
-        // fixme поле word.english - писать с заглавной буквы
-
         Word word = learnService.getWords().getLast();
         System.out.println(word);
         return new ModelAndView("learn/wrong-answer", "word", word);
     }
 
+    @Operation(
+            summary = "Верный перевод",
+            description = "Возвращает страницу, сообщающую о верном переводе слова: correct-answer.html")
     @GetMapping("/correct-answer")
     public ModelAndView translationCorrectAnswer() {
         return new ModelAndView("learn/correct-answer", "word", "Верно!");
     }
 
+    @Operation(
+            summary = "Успешное прохождение урока",
+            description = "Возвращает страницу, сообщающую об успешном прохождении урока: win.html")
     @GetMapping("/win")
     public ModelAndView showWin() {
         return new ModelAndView("learn/win");
