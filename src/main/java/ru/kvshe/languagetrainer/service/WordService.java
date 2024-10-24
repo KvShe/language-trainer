@@ -35,4 +35,9 @@ public class WordService {
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
+
+    public Word updateLastUsed(Word word) {
+        word.setLastUsed(LocalDate.now());
+        return update(word.getId(), word);
+    }
 }

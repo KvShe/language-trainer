@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.stereotype.Service;
 import ru.kvshe.languagetrainer.model.Word;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +24,15 @@ public class LearnService {
     }
 
     public boolean checkWord(Word word) {
-        // переводит строки в нижний регистр, убирает все символы, кроме латиницы и сравнивает
-        boolean result = util(word).getEnglish().equals(words.getFirst().getEnglish().toLowerCase());
+        // Сравнивает строки english
+        boolean result = clearAwayDebris(word).getEnglish().equals(words.getFirst().getEnglish().toLowerCase());
 
-        if (!result) {
-            word = words.getFirst();
+        word = words.getFirst();
+        if (result) {
+            word.setLastUsed(LocalDate.now());
+//            wordService.update(word.getId(), word);
+            wordService.updateLastUsed(word);
+        } else {
             words.add(word);
         }
 
@@ -36,7 +41,13 @@ public class LearnService {
         return result;
     }
 
-    private Word util(Word word) {
+    /**
+     * Переводит значение поля english в нижний регистр, убирает все символы, кроме латиницы
+     *
+     * @param word
+     * @return
+     */
+    private Word clearAwayDebris(Word word) {
         word.setEnglish(
                 word.getEnglish()
                         .toLowerCase()
