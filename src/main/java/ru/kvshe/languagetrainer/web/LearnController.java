@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ru.kvshe.languagetrainer.model.Word;
 import ru.kvshe.languagetrainer.service.LearnService;
-import ru.kvshe.languagetrainer.service.WordService;
 
 import java.util.Collections;
 import java.util.List;
