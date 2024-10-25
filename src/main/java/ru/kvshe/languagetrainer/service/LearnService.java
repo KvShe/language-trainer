@@ -20,7 +20,8 @@ public class LearnService {
 //    private List<Word> errors;
 
     public List<Word> createListOfWords() {
-        words = wordService.getAll();
+//        words = wordService.getAll();
+        words = wordService.getRandomWords();
         return words;
     }
 

@@ -1,20 +1,23 @@
 ## Language Training
 
-### Spring Boot, Spring Web, Spring AOP, Swagger (SpringDoc OpenAPI)
+### Spring Boot, Spring Web, Spring Jpa, Spring AOP, Swagger (SpringDoc OpenAPI)
 
 #### made:
 
 - implemented functions:
-    - меню на главной странице
-    - CRUD
-    - показать список всех слов
-    - проверка правильного написания слова
-        - игнорируется регистр (upper or low) при проверке слова
-        - При добавлении слова - убирать пробелы в начале и в конце
-        - Убрать двойные пробелы при вводе слова
-        - Убрать знаки препинания при вводе
+    - show меню на главной странице
+    - implemented crud
+    - show список всех добавленных слов
+    - check правильного написания слова
+        - ignored регистр (upper or low) при проверке слова
+        - delete пробелы в начале и в конце
+        - delete двойные пробелы при вводе слова
+        - delete знаки препинания при вводе
         - update field lastUse при правильном ответе
         - protection от случайного нажатия Enter в пустом поле ввода
+    - sorts words:
+        - by english
+        - by russian
 - add postgreSQL
 - add логирование в консоль через Spring AOP & Lombok
     - WordService
@@ -28,14 +31,11 @@
 - add банк слов, которые давно не проверялись
 - add в меню кнопку выключения приложения
 - add pagination
-    - ленивая загрузка или инфинит скролл (infinite scroll)
-        - при этом новые данные загружаются автоматически,
-        - когда пользователь прокручивает страницу вниз
+    - ленивая загрузка или infinite scroll
+        - new data loading automatically, когда пользователь прокручивает страницу вниз
     - add elasticsearch - db for logs
     - add logback - библиотека для логирования
-- add sorts:
-    - by english
-    - by russian
+- add validator (hibernate, jacarta) - ограничение на вводимое слово по длине символов (255)
 - add words:
     - util - использовать
     - tool - инструмент

@@ -18,8 +18,8 @@
 <hr/>
 <table class="center">
     <tr>
-        <th>English</th>
-        <th>Russian</th>
+        <th><a th:href="@{/words(sort = 'english')}" th:text="English"/></th>
+        <th><a th:href="@{/words(sort = 'russian')}" th:text="Russian"/></th>
     </tr>
     <tr class="content" th:each="word : ${words}">
         <td><a th:href="@{/words/{id}(id=${word.id})}" th:text="${word.english}"></a></td>

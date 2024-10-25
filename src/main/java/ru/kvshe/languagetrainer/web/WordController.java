@@ -15,6 +15,8 @@ import ru.kvshe.languagetrainer.model.Word;
 import ru.kvshe.languagetrainer.service.WordService;
 import ru.kvshe.languagetrainer.util.API;
 
+import java.util.List;
+
 @Tag(
         name = "Page Controller",
         description = "Возвращает страницы")
@@ -30,9 +32,14 @@ public class WordController {
             responses = @ApiResponse(description = "Ok", responseCode = "200", content = @Content(schema = @Schema(implementation = Word.class))))
     @API.InternalServerError
     @GetMapping
-    public ModelAndView show() {
+    public ModelAndView show(@RequestParam(required = false) String sort) {
+        List<Word> words = wordService.getAll();
+
+        if (sort != null && sort.equals("english")) wordService.sortByEnglish(words);
+        if (sort != null && sort.equals("russian")) wordService.sortByRussian(words);
+
         return new ModelAndView("words/index")
-                .addObject("words", wordService.getAll());
+                .addObject("words", words);
     }
 
     @API.InternalServerError
