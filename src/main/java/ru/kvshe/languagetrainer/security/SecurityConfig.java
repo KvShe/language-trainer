@@ -22,6 +22,14 @@ public class SecurityConfig {
         return http
                 .cors(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
+
+
+                .authorizeHttpRequests(request -> {
+//                    request.requestMatchers("/", "/style.css/**", "/js/**", "/images/**").permitAll(); // разрешаем доступ к статическим ресурсам
+                    request.requestMatchers("/", "/static/**").permitAll(); // разрешаем доступ к статическим ресурсам
+                    request.anyRequest().permitAll();
+                })
+
                 // todo
                 .build();
     }

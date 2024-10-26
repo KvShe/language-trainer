@@ -9,50 +9,46 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ru.kvshe.languagetrainer.model.Word;
-import ru.kvshe.languagetrainer.service.LearnService;
+import ru.kvshe.languagetrainer.service.LessonService;
 
 import java.util.Collections;
 import java.util.List;
 
 @Controller
-@RequestMapping("/learn")
+@RequestMapping("/lesson")
 @RequiredArgsConstructor
-public class LearnController {
-    private final LearnService learnService;
-    private int correctAnswers;
-    private int wrongAnswers;
+public class LessonController {
+    private final LessonService lessonService;
 
     @Operation(
             summary = "Получить список слов",
             description = "Формирует список слов для обучения и возвращает страницу с проверкой первого слова")
     @GetMapping
     public ModelAndView learn(Word word) {
-        List<Word> words = learnService.createListOfWords();// todo создавать список слов, которые давно не проверялись
+        List<Word> words = lessonService.createListOfRandomWords();// todo создавать список слов, которые давно не проверялись
 
         Collections.shuffle(words);
 
         word.setRussian(words.getFirst().getRussian());
-        return new ModelAndView("learn/show")
+        return new ModelAndView("lesson/show")
                 .addObject("word", word);
     }
 
     @GetMapping("/show")
     public ModelAndView learnShow(Word word) {
-        List<Word> words = learnService.getWords();
+        List<Word> words = lessonService.getWords();
 
         if (!words.isEmpty()) {
-            word.setRussian(learnService.getWords().getFirst().getRussian());
-            return new ModelAndView("learn/show")
+            word.setRussian(lessonService.getWords().getFirst().getRussian());
+            return new ModelAndView("lesson/show")
                     .addObject("word", word);
         }
 
         // fixme оптимизировать возвращение на page эффективность прохождения урока в %: quantity слов & quantity попыток
-        float result = ((float) correctAnswers / (wrongAnswers + correctAnswers)) * 100;
-
-        correctAnswers = 0;
-        wrongAnswers = 0;
-        return new ModelAndView("learn/win")
-                .addObject("count", (int) result);
+        int result = lessonService.getPercentageOfCorrectAnswers();
+        lessonService.clean();
+        return new ModelAndView("lesson/win")
+                .addObject("count", result);
     }
 
     @PostMapping
@@ -62,17 +58,17 @@ public class LearnController {
 //            return new ModelAndView("redirect:/words");
 //        }
 
-        // protected от случайного нажатия Enter в пустом поле
-        if (word.getEnglish().isEmpty()) {
-            return new ModelAndView("redirect:/learn/show");
+        // protected от случайного нажатия Enter в пустом поле или поле, заполненными пробелами
+        if (word.getEnglish().replaceAll(" ", "").isEmpty()) {
+            return new ModelAndView("redirect:/lesson/show");
         }
 
-        if (!learnService.checkWord(word)) {
-            wrongAnswers++;
-            return new ModelAndView("redirect:/learn/wrong-answer");
+        if (lessonService.checkWord(word)) {
+            lessonService.increaseCorrectAnswers();
+            return new ModelAndView("redirect:/lesson/correct-answer");
         } else {
-            correctAnswers++;
-            return new ModelAndView("redirect:/learn/correct-answer");
+            lessonService.increaseWrongAnswers();
+            return new ModelAndView("redirect:/lesson/wrong-answer");
         }
     }
 
@@ -81,9 +77,9 @@ public class LearnController {
             description = "Возвращает страницу, сообщающую о неверном переводе слова: wrong-answer.html")
     @GetMapping("/wrong-answer")
     public ModelAndView translationError() {
-        Word word = learnService.getWords().getLast();
+        Word word = lessonService.getWords().getLast();
         System.out.println(word);
-        return new ModelAndView("learn/wrong-answer", "word", word);
+        return new ModelAndView("lesson/wrong-answer", "word", word);
     }
 
     @Operation(
@@ -91,7 +87,7 @@ public class LearnController {
             description = "Возвращает страницу, сообщающую о верном переводе слова: correct-answer.html")
     @GetMapping("/correct-answer")
     public ModelAndView translationCorrectAnswer() {
-        return new ModelAndView("learn/correct-answer", "word", "Верно!");
+        return new ModelAndView("lesson/correct-answer", "word", "Верно!");
     }
 
     @Operation(

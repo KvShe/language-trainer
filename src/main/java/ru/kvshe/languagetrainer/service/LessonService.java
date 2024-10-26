@@ -14,13 +14,16 @@ import java.util.List;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class LearnService {
+public class LessonService implements LessonObserver {
     private final WordService wordService;
     private List<Word> words = new ArrayList<>();
 //    private List<Word> errors;
 
-    public List<Word> createListOfWords() {
-//        words = wordService.getAll();
+    // variables for LessonObserver
+    private int correctAnswers;
+    private int wrongAnswers;
+
+    public List<Word> createListOfRandomWords() {
         words = wordService.getRandomWords();
         return words;
     }
@@ -32,7 +35,6 @@ public class LearnService {
         word = words.getFirst();
         if (result) {
             word.setLastUsed(LocalDate.now());
-//            wordService.update(word.getId(), word);
             wordService.updateLastUsed(word);
         } else {
             words.add(word);
@@ -46,8 +48,8 @@ public class LearnService {
     /**
      * Переводит значение поля english в нижний регистр, убирает все символы, кроме латиницы
      *
-     * @param word
-     * @return
+     * @param word слово со значениями, полученными от пользователя
+     * @return слово с полем english в нижнем регистре и состоящее только из латиницы
      */
     private Word clearAwayDebris(Word word) {
         word.setEnglish(
@@ -57,5 +59,27 @@ public class LearnService {
         );
 
         return word;
+    }
+
+    @Override
+    public int increaseCorrectAnswers() {
+        return ++correctAnswers;
+    }
+
+    @Override
+    public int increaseWrongAnswers() {
+        return ++wrongAnswers;
+    }
+
+    @Override
+    public int getPercentageOfCorrectAnswers() {
+        double result = ((double) correctAnswers / (correctAnswers + wrongAnswers)) * 100;
+        return (int) result;
+    }
+
+    @Override
+    public void clean() {
+        correctAnswers = 0;
+        wrongAnswers = 0;
     }
 }

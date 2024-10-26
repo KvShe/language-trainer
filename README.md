@@ -18,16 +18,22 @@
     - sorts words:
         - by english
         - by russian
-- add postgreSQL
-- add логирование в консоль через Spring AOP & Lombok
+- added postgreSQL
+- added логирование в консоль через Spring AOP & Lombok
     - WordService
-- add таймер для измерения времени выполнения метода
+- added таймер для измерения времени выполнения метода
     - WordService
 
 ---
 
 #### to-do list:
 
+- переписать через паттерн Observer (implement)
+    - подсчёт правильных и не правильных слов,
+    - высчитывание % прохождения
+    - public interface Observer {
+      void update(String message);
+      }
 - add банк слов, которые давно не проверялись
 - add в меню кнопку выключения приложения
 - add pagination
@@ -61,3 +67,4 @@
     - duration - продолжительность
     - confirmation - подтверждений
     - protection - защита
+    - required - необходимый
