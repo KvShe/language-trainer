@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Language trainer</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body class="center">
+<header class="header">
+    <a class="header_link" href="/">Главная</a>
+    <a class="header_link" href="/words">Список слов</a>
+</header>
+
+<h1>Language trainer</h1>
+<h3 th:text="${ip}"></h3>
+<hr/>
+<div>
+    <p class="content"><a href="/lesson">Начать занятие</a></p>
+    <p class="content"><a href="/words">Показать список всех слов</a></p>
+    <p class="content"><a href="/words/new">Добавить новое слово</a></p>
+</div>
+</body>
+</html>

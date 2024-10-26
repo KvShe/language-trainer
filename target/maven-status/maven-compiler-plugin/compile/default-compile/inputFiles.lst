@@ -1,0 +1,16 @@
+J:\Developer\Java\my\language-trainer\src\main\java\ru\kvshe\languagetrainer\aspect\WordAspect.java
+J:\Developer\Java\my\language-trainer\src\main\java\ru\kvshe\languagetrainer\exception\ExceptionController.java
+J:\Developer\Java\my\language-trainer\src\main\java\ru\kvshe\languagetrainer\exception\NotFoundWordException.java
+J:\Developer\Java\my\language-trainer\src\main\java\ru\kvshe\languagetrainer\LanguageTrainer.java
+J:\Developer\Java\my\language-trainer\src\main\java\ru\kvshe\languagetrainer\model\Word.java
+J:\Developer\Java\my\language-trainer\src\main\java\ru\kvshe\languagetrainer\repository\WordRepository.java
+J:\Developer\Java\my\language-trainer\src\main\java\ru\kvshe\languagetrainer\rest\WordApiController.java
+J:\Developer\Java\my\language-trainer\src\main\java\ru\kvshe\languagetrainer\security\SecurityConfig.java
+J:\Developer\Java\my\language-trainer\src\main\java\ru\kvshe\languagetrainer\service\LessonObserver.java
+J:\Developer\Java\my\language-trainer\src\main\java\ru\kvshe\languagetrainer\service\LessonService.java
+J:\Developer\Java\my\language-trainer\src\main\java\ru\kvshe\languagetrainer\service\WordService.java
+J:\Developer\Java\my\language-trainer\src\main\java\ru\kvshe\languagetrainer\util\API.java
+J:\Developer\Java\my\language-trainer\src\main\java\ru\kvshe\languagetrainer\util\DataServer.java
+J:\Developer\Java\my\language-trainer\src\main\java\ru\kvshe\languagetrainer\web\LessonController.java
+J:\Developer\Java\my\language-trainer\src\main\java\ru\kvshe\languagetrainer\web\MainController.java
+J:\Developer\Java\my\language-trainer\src\main\java\ru\kvshe\languagetrainer\web\WordController.java

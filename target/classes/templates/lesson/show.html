@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link media="all" rel="stylesheet" th:href="@{/style.css}" type="text/css">
+    <title>Learn</title>
+</head>
+<body class="center">
+<header class="header">
+    <a class="header_link" href="/">Главная</a>
+    <a class="header_link" href="/words">Список слов</a>
+</header>
+
+<h1>Language Trainer</h1>
+<hr/>
+<!--<form class="center_form, content" action="#" th:action="@{/learn}" th:object="${word}" method="post">-->
+<form class="content" action="#" th:action="@{/lesson}" th:object="${word}" method="post">
+    <label for="english" th:text="${word.russian}"/>
+    <input type="text" th:field="*{english}" id="english" placeholder="Перевод" autocomplete="off" autofocus>
+    <input type="submit" value="Проверить">
+</form>
+
+
+<!--<form action="#" th:action="@{/learn}" th:object="${word}" method="post">-->
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <td>-->
+<!--                <label for="english" th:text="${word.russian}"></label>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <input type="text" th:field="*{english}" id="english" placeholder="Перевод" autofocus>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <input type="submit" value="Проверить">-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--</form>-->
+
+</body>
+</html>
