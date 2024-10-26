@@ -1,9 +1,9 @@
 package ru.kvshe.languagetrainer.service;
 
 public interface LessonObserver {
-    int increaseCorrectAnswers();
+    void increaseCorrectAnswers();
 
-    int increaseWrongAnswers();
+    void increaseWrongAnswers();
 
     int getPercentageOfCorrectAnswers();
 

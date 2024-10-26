@@ -94,8 +94,8 @@
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                         </exclude>
-                        <excludeDevtools>true</excludeDevtools>
                     </excludes>
+                    <excludeDevtools>true</excludeDevtools>
                     <!--                    <excludeDevtools>true</excludeDevtools> &lt;!&ndash;исключает devTools из финального jar&ndash;&gt;-->
                 </configuration>
             </plugin>

@@ -17,7 +17,6 @@ import java.util.List;
 public class LessonService implements LessonObserver {
     private final WordService wordService;
     private List<Word> words = new ArrayList<>();
-//    private List<Word> errors;
 
     // variables for LessonObserver
     private int correctAnswers;
@@ -62,13 +61,13 @@ public class LessonService implements LessonObserver {
     }
 
     @Override
-    public int increaseCorrectAnswers() {
-        return ++correctAnswers;
+    public void increaseCorrectAnswers() {
+        ++correctAnswers;
     }
 
     @Override
-    public int increaseWrongAnswers() {
-        return ++wrongAnswers;
+    public void increaseWrongAnswers() {
+        ++wrongAnswers;
     }
 
     @Override
