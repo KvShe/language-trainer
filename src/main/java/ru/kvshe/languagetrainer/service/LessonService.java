@@ -34,7 +34,7 @@ public class LessonService implements LessonObserver {
         word = words.getFirst();
         if (result) {
             word.setLastUsed(LocalDate.now());
-            wordService.updateLastUsed(word);
+//            wordService.updateLastUsed(word);
         } else {
             words.add(word);
         }
