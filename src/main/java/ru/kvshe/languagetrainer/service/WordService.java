@@ -1,24 +1,32 @@
 package ru.kvshe.languagetrainer.service;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kvshe.languagetrainer.model.Word;
 import ru.kvshe.languagetrainer.repository.WordRepository;
+import ru.kvshe.languagetrainer.util.sort.SortStrategy;
 
 import java.time.LocalDate;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
+@Getter
+@Setter
 @RequiredArgsConstructor
 public class WordService {
     private final WordRepository wordRepository;
+    private SortStrategy sortStrategy;
 
     public List<Word> getAll() {
         return wordRepository.findAll();
+    }
+
+    public void sortWords(List<Word> words) {
+        sortStrategy.sort(words);
     }
 
     /**
@@ -60,6 +68,7 @@ public class WordService {
 
     /**
      * Получает из списка слов идентификаторы и передаёт их в метод, для обновления поля lastUsed на текущую дату
+     *
      * @param words список слов, у которых требуется обновить поле lastUsed
      */
     @Transactional
@@ -71,13 +80,13 @@ public class WordService {
         wordRepository.updateWordsTextByIds(LocalDate.now(), ids);
     }
 
-    public List<Word> sortByEnglish(List<Word> words) {
-        words.sort(Comparator.comparing(Word::getEnglish));
-        return words;
-    }
-
-    public List<Word> sortByRussian(List<Word> words) {
-        words.sort(Comparator.comparing(Word::getRussian));
-        return words;
-    }
+//    public List<Word> sortByEnglish(List<Word> words) {
+//        words.sort(Comparator.comparing(Word::getEnglish));
+//        return words;
+//    }
+//
+//    public List<Word> sortByRussian(List<Word> words) {
+//        words.sort(Comparator.comparing(Word::getRussian));
+//        return words;
+//    }
 }

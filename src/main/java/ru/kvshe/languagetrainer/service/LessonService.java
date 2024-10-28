@@ -36,7 +36,6 @@ public class LessonService implements LessonObserver {
         if (result) {
             word.setLastUsed(LocalDate.now());
             wordsToUpdateInDatabase.add(word);
-//            wordService.updateLastUsed(word);
         } else {
             words.add(word);
         }
@@ -50,7 +49,6 @@ public class LessonService implements LessonObserver {
      * Обновляет у проверяемых слов поле lastUsed
      */
     public void updateWords() {
-//        wordService.updateAll(wordsToUpdateInDatabase);
         wordService.updateWordsData(wordsToUpdateInDatabase);
         wordsToUpdateInDatabase.clear();
     }

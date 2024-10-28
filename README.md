@@ -8,14 +8,16 @@
     - show меню на главной странице
     - implemented crud
     - show список всех добавленных слов
+    - высчитывает % правильных ответов (implemented через паттерн Observer)
     - check правильного написания слова
         - ignored регистр (upper or low) при проверке слова
         - delete пробелы в начале и в конце
         - delete двойные пробелы при вводе слова
         - delete знаки препинания при вводе
-        - update field lastUse при правильном ответе
-        - protection от случайного нажатия Enter в пустом поле ввода
-    - sorts words:
+    - update field lastUse при правильном ответе
+        - оптимизировал отправку запроса только на обновление поля lastUsed
+    - protection от случайного нажатия Enter в пустом поле ввода
+    - sorts words (Использовал паттерн Strategy):
         - by english
         - by russian
 - added postgreSQL
@@ -28,12 +30,6 @@
 
 #### to-do list:
 
-- переписать через паттерн Observer (implement)
-    - подсчёт правильных и не правильных слов,
-    - высчитывание % прохождения
-    - public interface Observer {
-      void update(String message);
-      }
 - add банк слов, которые давно не проверялись
 - add в меню кнопку выключения приложения
 - add pagination
@@ -43,8 +39,6 @@
     - add logback - библиотека для логирования
 - add validator (hibernate, jacarta) - ограничение на вводимое слово по длине символов (255)
 - add words:
-    - util - использовать
-    - tool - инструмент
     - example - пример
     - override - переопределить
     - accept - принимать

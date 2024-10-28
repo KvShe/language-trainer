@@ -14,6 +14,8 @@ import ru.kvshe.languagetrainer.exception.NotFoundWordException;
 import ru.kvshe.languagetrainer.model.Word;
 import ru.kvshe.languagetrainer.service.WordService;
 import ru.kvshe.languagetrainer.util.API;
+import ru.kvshe.languagetrainer.util.sort.EnglishSortStrategy;
+import ru.kvshe.languagetrainer.util.sort.RussianSortStrategy;
 
 import java.util.List;
 
@@ -35,8 +37,17 @@ public class WordController {
     public ModelAndView show(@RequestParam(required = false) String sort) {
         List<Word> words = wordService.getAll();
 
-        if (sort != null && sort.equals("english")) wordService.sortByEnglish(words);
-        if (sort != null && sort.equals("russian")) wordService.sortByRussian(words);
+        if (sort != null && sort.equals("english")) {
+//            wordService.sortByEnglish(words);
+            wordService.setSortStrategy(new EnglishSortStrategy());
+            wordService.sortWords(words);
+        }
+
+        if (sort != null && sort.equals("russian")) {
+//            wordService.sortByRussian(words);
+            wordService.setSortStrategy(new RussianSortStrategy());
+            wordService.sortWords(words);
+        }
 
         return new ModelAndView("words/index")
                 .addObject("words", words);
