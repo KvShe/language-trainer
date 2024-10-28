@@ -1,11 +1,13 @@
 package ru.kvshe.languagetrainer.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.kvshe.languagetrainer.model.Word;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -29,4 +31,17 @@ public interface WordRepository extends JpaRepository<Word, Long> {
      */
     @Query(value = "select * from word where last_used < now() - cast(:days || ' days' as interval) order by random() limit :quantity", nativeQuery = true)
     List<Word> findRandomWordsNotUsedInLastDays(@Param("quantity") int quantity, @Param("days") int days);
+
+//    @Modifying
+//    @Query("update Word set Word.lastUsed = :data")
+//    void updateAllWordsData(@Param("data") LocalDate data);
+
+    /**
+     * Обновляет у записей поле lastUsed
+     * @param dateUse дата, на которую будет обновлено поле lastUsed
+     * @param ids идентификаторы записей, у которых будет обновлено поле lastUsed
+     */
+    @Modifying
+    @Query("update Word w set w.lastUsed = :dateUse where w.id in :ids")
+    void updateWordsTextByIds(@Param("dateUse") LocalDate dateUse, @Param("ids") List<Long> ids);
 }

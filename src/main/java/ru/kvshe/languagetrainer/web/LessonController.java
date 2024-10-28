@@ -34,6 +34,10 @@ public class LessonController {
                 .addObject("word", word);
     }
 
+    /**
+     * @param word
+     * @return
+     */
     @GetMapping("/show")
     public ModelAndView learnShow(Word word) {
         List<Word> words = lessonService.getWords();
@@ -47,6 +51,7 @@ public class LessonController {
         // fixme оптимизировать возвращение на page эффективность прохождения урока в %: quantity слов & quantity попыток
         int result = lessonService.getPercentageOfCorrectAnswers();
         lessonService.clean();
+        lessonService.updateWords();
         return new ModelAndView("lesson/win")
                 .addObject("count", result);
     }
@@ -90,11 +95,13 @@ public class LessonController {
         return new ModelAndView("lesson/correct-answer", "word", "Верно!");
     }
 
-    @Operation(
-            summary = "Успешное прохождение урока",
-            description = "Возвращает страницу, сообщающую об успешном прохождении урока: win.html")
-    @GetMapping("/win")
-    public ModelAndView showWin() {
-        return new ModelAndView("learn/win");
-    }
+//    @Operation(
+//            summary = "Успешное прохождение урока",
+//            description = "Возвращает страницу, сообщающую об успешном прохождении урока: win.html")
+//    @GetMapping("/win")
+//    public ModelAndView showWin() {
+//        System.out.println("Hello!");
+//        lessonService.updateWords();
+//        return new ModelAndView("lesson/win");
+//    }
 }

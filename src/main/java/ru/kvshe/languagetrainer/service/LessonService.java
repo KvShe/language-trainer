@@ -17,6 +17,7 @@ import java.util.List;
 public class LessonService implements LessonObserver {
     private final WordService wordService;
     private List<Word> words = new ArrayList<>();
+    private List<Word> wordsToUpdateInDatabase = new ArrayList<>();
 
     // variables for LessonObserver
     private int correctAnswers;
@@ -34,6 +35,7 @@ public class LessonService implements LessonObserver {
         word = words.getFirst();
         if (result) {
             word.setLastUsed(LocalDate.now());
+            wordsToUpdateInDatabase.add(word);
 //            wordService.updateLastUsed(word);
         } else {
             words.add(word);
@@ -42,6 +44,15 @@ public class LessonService implements LessonObserver {
         words.removeFirst();
 
         return result;
+    }
+
+    /**
+     * Обновляет у проверяемых слов поле lastUsed
+     */
+    public void updateWords() {
+//        wordService.updateAll(wordsToUpdateInDatabase);
+        wordService.updateWordsData(wordsToUpdateInDatabase);
+        wordsToUpdateInDatabase.clear();
     }
 
     /**
