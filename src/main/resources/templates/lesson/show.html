@@ -9,7 +9,7 @@
     <link media="all" rel="stylesheet" th:href="@{/style.css}" type="text/css">
     <title>Language trainer</title>
 </head>
-<body class="center">
+<body class="center-table">
 <header class="header">
     <a class="header_link" href="/">Главная</a>
     <a class="header_link" href="/words">Список слов</a>
@@ -18,7 +18,7 @@
 <h1>Language Trainer</h1>
 <hr/>
 <!--<form class="center_form, content" action="#" th:action="@{/learn}" th:object="${word}" method="post">-->
-<form class="content" action="#" th:action="@{/lesson}" th:object="${word}" method="post">
+<form class="content center" action="#" th:action="@{/lesson}" th:object="${word}" method="post">
     <label for="english" th:text="${word.russian}"/>
     <input type="text" th:field="*{english}" id="english" placeholder="Перевод" autocomplete="off" autofocus>
     <input type="submit" value="Проверить">

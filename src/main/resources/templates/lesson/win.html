@@ -9,7 +9,7 @@
     <link media="all" rel="stylesheet" th:href="@{/style.css}" type="text/css">
     <title>Language trainer</title>
 </head>
-<body class="center">
+<body class="center-table">
 <audio autoplay>
     <source th:src="@{/win.mp3}" type="audio/mpeg">
 </audio>
@@ -21,7 +21,7 @@
 
 <h1>Language Trainer</h1>
 <hr/>
-<form class="content" action="#" th:action="@{/}" method="get">
+<form class="content center" action="#" th:action="@{/}" method="get">
     <p th:text="'Ваш результат ' + ${count} + '%!'"></p>
     <input type="submit" value="Продолжить" autofocus>
 </form>

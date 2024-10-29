@@ -9,18 +9,20 @@
     <link media="all" rel="stylesheet" th:href="@{/style.css}" type="text/css">
     <title>Language trainer</title>
 </head>
-<body class="center">
+<body class="center-table">
 <header class="header">
     <a class="header_link" href="/">Главная</a>
     <a class="header_link" href="/words">Список слов</a>
 </header>
 <h1 th:text="${word.getEnglish()}"></h1>
 <hr/>
-<p th:text="'English: ' + ${word.english}"/>
-<p th:text="'Russian: ' + ${word.russian}"/>
-<p th:text="'Last used: ' + ${word.lastUsed}"/>
+<div class="center">
+    <p th:text="'English: ' + ${word.english}"/>
+    <p th:text="'Russian: ' + ${word.russian}"/>
+    <p th:text="'Last used: ' + ${word.lastUsed}"/>
+</div>
 
-<div>
+<div class="center">
     <form th:action="@{/words/{id}/edit(id=${word.id})}" th:object="${word}">
         <input type="submit" value="Редактировать">
     </form>
