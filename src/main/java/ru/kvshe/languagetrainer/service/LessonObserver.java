@@ -8,4 +8,6 @@ public interface LessonObserver {
     int getPercentageOfCorrectAnswers();
 
     void clean();
+
+    int getProgressPercentage(int quantityWords);
 }

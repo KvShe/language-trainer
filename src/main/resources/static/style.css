@@ -101,3 +101,22 @@ table {
 .center_form {
     text-align: center;
 }
+
+.progress-container {
+    width: 60vw; /* ширина 60% от окна, чтобы слева и справа было по 20% */
+    margin: 0 auto; /* выравнивание по центру */
+    background-color: #e0e0e0; /* цвет фона */
+    border-radius: 10px; /* скругленные углы */
+    overflow: hidden; /* скрытие излишков */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* легкая тень для контейнера */
+}
+
+/* Полоса прогресса */
+.progress-bar {
+    height: 20px; /* высота полосы */
+    background: linear-gradient(to top, #b0e0e6, #add8e6); /* светло-голубой градиент */
+    border-radius: 10px 0 0 10px; /* скругление левого края */
+    box-shadow: inset 0 -2px 5px rgba(255, 255, 255, 0.5), /* верхний светлый отблеск */
+    inset 0 2px 5px rgba(0, 0, 0, 0.1); /* нижняя внутренняя тень */
+    transition: width 0.5s ease; /* плавное изменение ширины */
+}

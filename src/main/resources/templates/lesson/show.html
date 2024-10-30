@@ -15,6 +15,10 @@
     <a class="header_link" href="/words">Список слов</a>
 </header>
 
+<div class="progress-container">
+    <div class="progress-bar" th:style="'width:' + ${progress} + '%'"></div>
+</div>
+
 <h1>Language Trainer</h1>
 <hr/>
 <!--<form class="center_form, content" action="#" th:action="@{/learn}" th:object="${word}" method="post">-->

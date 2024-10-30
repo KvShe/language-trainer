@@ -24,28 +24,33 @@ public class LessonController {
             summary = "Получить список слов",
             description = "Формирует список слов для обучения и возвращает страницу с проверкой первого слова")
     @GetMapping
-    public ModelAndView learn(Word word) {
+    public ModelAndView lesson(Word word) {
         List<Word> words = lessonService.createListOfRandomWords();// todo создавать список слов, которые давно не проверялись
 
         Collections.shuffle(words);
 
         word.setRussian(words.getFirst().getRussian());
         return new ModelAndView("lesson/show")
-                .addObject("word", word);
+                .addObject("word", word)
+                .addObject("progress", 5);
     }
 
-    /**
-     * @param word
-     * @return
-     */
+    @Operation(
+            summary = "Возвращает страницу с уроком",
+            description = """
+                    Получает список слов, которые проверятся
+                    Если список не пуст - берёт первое слово и передаёт его на страницу с уроком
+                    Если список пуст - возвращает страницу с завершением урока
+                    """)
     @GetMapping("/show")
-    public ModelAndView learnShow(Word word) {
+    public ModelAndView lessonShow(Word word) {
         List<Word> words = lessonService.getWords();
 
         if (!words.isEmpty()) {
             word.setRussian(lessonService.getWords().getFirst().getRussian());
             return new ModelAndView("lesson/show")
-                    .addObject("word", word);
+                    .addObject("word", word)
+                    .addObject("progress", lessonService.getProgressPercentage(words.size()));
         }
 
         // fixme оптимизировать возвращение на page эффективность прохождения урока в %: quantity слов & quantity попыток
@@ -53,11 +58,12 @@ public class LessonController {
         lessonService.clean();
         lessonService.updateWords();
         return new ModelAndView("lesson/win")
-                .addObject("count", result);
+                .addObject("count", result)
+                .addObject("progress", lessonService.getProgressPercentage(words.size()));
     }
 
     @PostMapping
-    public ModelAndView checkLearn(@ModelAttribute Word word) {
+    public ModelAndView checkLesson(@ModelAttribute Word word) {
         // todo проверить необходимость этого if
 //        if (word == null) {
 //            return new ModelAndView("redirect:/words");
@@ -81,10 +87,11 @@ public class LessonController {
             summary = "Не верный перевод",
             description = "Возвращает страницу, сообщающую о неверном переводе слова: wrong-answer.html")
     @GetMapping("/wrong-answer")
-    public ModelAndView translationError() {
-        Word word = lessonService.getWords().getLast();
-        System.out.println(word);
-        return new ModelAndView("lesson/wrong-answer", "word", word);
+    public ModelAndView translationWrongAnswer() {
+        List<Word> words = lessonService.getWords();
+        Word word = words.getLast();
+        return new ModelAndView("lesson/wrong-answer", "word", word)
+                .addObject("progress", lessonService.getProgressPercentage(words.size()));
     }
 
     @Operation(
@@ -92,7 +99,9 @@ public class LessonController {
             description = "Возвращает страницу, сообщающую о верном переводе слова: correct-answer.html")
     @GetMapping("/correct-answer")
     public ModelAndView translationCorrectAnswer() {
-        return new ModelAndView("lesson/correct-answer", "word", "Верно!");
+        List<Word> words = lessonService.getWords();
+        return new ModelAndView("lesson/correct-answer", "word", "Верно!")
+                .addObject("progress", lessonService.getProgressPercentage(words.size()));
     }
 
 //    @Operation(

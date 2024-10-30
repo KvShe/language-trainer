@@ -22,6 +22,7 @@ public class LessonService implements LessonObserver {
     // variables for LessonObserver
     private int correctAnswers;
     private int wrongAnswers;
+    private int quantity = 10;
 
     public List<Word> createListOfRandomWords() {
         words = wordService.getRandomWords();
@@ -89,5 +90,17 @@ public class LessonService implements LessonObserver {
     public void clean() {
         correctAnswers = 0;
         wrongAnswers = 0;
+    }
+
+    /**
+     * Метод возвращает процент прогресса прохождения урока
+     *
+     * @param quantityWords количество слов, которые осталось проверить
+     * @return процент прогресса прохождения урока
+     */
+    @Override
+    public int getProgressPercentage(int quantityWords) {
+        int progress = (int) (words.size() * 100f / quantity);
+        return 100 - progress;
     }
 }

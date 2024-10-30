@@ -20,6 +20,7 @@ import java.util.Optional;
 public class WordService {
     private final WordRepository wordRepository;
     private SortStrategy sortStrategy;
+    private int quantity = 10;
 
     public List<Word> getAll() {
         return wordRepository.findAll();
@@ -30,9 +31,9 @@ public class WordService {
     }
 
     /**
-     * Возвращает список из случайных слов в количестве quantity
+     * Метод возвращает список из случайных слов в количестве quantity
      *
-     * @return
+     * @return список из случайных слов
      */
     public List<Word> getRandomWords() {
         int quantity = 10;
@@ -55,15 +56,6 @@ public class WordService {
 
     public void deleteById(Long id) {
         wordRepository.deleteById(id);
-    }
-
-    public Word updateLastUsed(Word word) {
-        word.setLastUsed(LocalDate.now());
-        return update(word.getId(), word);
-    }
-
-    public void updateAll(List<Word> words) {
-        wordRepository.saveAll(words);
     }
 
     /**

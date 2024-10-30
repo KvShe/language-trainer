@@ -25,9 +25,9 @@ public interface WordRepository extends JpaRepository<Word, Long> {
 
     /**
      * Возвращает список слов, которые не использовались более заданного времени
-     * @param quantity
-     * @param days
-     * @return
+     * @param quantity количество записей, которые метод вернёт
+     * @param days число дней, если поле las_used отличается от текущей даты на большее количество, то эта запись будет возвращена
+     * @return список слов, которые не проверялись более days
      */
     @Query(value = "select * from word where last_used < now() - cast(:days || ' days' as interval) order by random() limit :quantity", nativeQuery = true)
     List<Word> findRandomWordsNotUsedInLastDays(@Param("quantity") int quantity, @Param("days") int days);
