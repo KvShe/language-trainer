@@ -39,7 +39,6 @@
     - add logback - библиотека для логирования
 - add validator (hibernate, jacarta) - ограничение на вводимое слово по длине символов (255)
 - add words:
-    - example - пример
     - override - переопределить
     - accept - принимать
     - everything - всё

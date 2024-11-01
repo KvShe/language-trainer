@@ -32,7 +32,7 @@ public class LessonController {
         word.setRussian(words.getFirst().getRussian());
         return new ModelAndView("lesson/show")
                 .addObject("word", word)
-                .addObject("progress", 5);
+                .addObject("progress", 0);
     }
 
     @Operation(
@@ -53,7 +53,6 @@ public class LessonController {
                     .addObject("progress", lessonService.getProgressPercentage(words.size()));
         }
 
-        // fixme оптимизировать возвращение на page эффективность прохождения урока в %: quantity слов & quantity попыток
         int result = lessonService.getPercentageOfCorrectAnswers();
         lessonService.clean();
         lessonService.updateWords();
@@ -64,12 +63,7 @@ public class LessonController {
 
     @PostMapping
     public ModelAndView checkLesson(@ModelAttribute Word word) {
-        // todo проверить необходимость этого if
-//        if (word == null) {
-//            return new ModelAndView("redirect:/words");
-//        }
-
-        // protected от случайного нажатия Enter в пустом поле или поле, заполненными пробелами
+        // protected от случайного нажатия Enter в пустом поле или поле, заполненным пробелами
         if (word.getEnglish().replaceAll(" ", "").isEmpty()) {
             return new ModelAndView("redirect:/lesson/show");
         }

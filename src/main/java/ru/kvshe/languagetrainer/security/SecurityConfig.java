@@ -2,12 +2,14 @@ package ru.kvshe.languagetrainer.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import ru.kvshe.languagetrainer.model.Role;
 
 @Configuration
 @EnableWebSecurity
@@ -25,10 +27,22 @@ public class SecurityConfig {
 
 
                 .authorizeHttpRequests(request -> {
-//                    request.requestMatchers("/", "/style.css/**", "/js/**", "/images/**").permitAll(); // разрешаем доступ к статическим ресурсам
-                    request.requestMatchers("/", "/static/**").permitAll(); // разрешаем доступ к статическим ресурсам
-                    request.anyRequest().permitAll();
+                    request.requestMatchers(
+                            "/css/**",
+                            "/js/**",
+                            "/img/**",
+                            "/sound/**"
+                    ).permitAll(); // разрешаем доступ к статическим ресурсам
+                    request.requestMatchers(
+                            "/",
+                            "/register"
+//                            "/login"
+                    ).permitAll();
+//                    request.anyRequest().permitAll();
+                    request.anyRequest().hasAnyAuthority(Role.USER.getName(), Role.ADMIN.getName());
                 })
+
+                .formLogin(Customizer.withDefaults())
 
                 // todo
                 .build();
