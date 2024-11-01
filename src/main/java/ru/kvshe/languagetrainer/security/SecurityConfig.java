@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import ru.kvshe.languagetrainer.model.Role;
 
 @Configuration
 @EnableWebSecurity
@@ -25,21 +24,19 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
 
-
                 .authorizeHttpRequests(request -> {
                     request.requestMatchers(
                             "/css/**",
                             "/js/**",
                             "/img/**",
-                            "/sound/**"
-                    ).permitAll(); // разрешаем доступ к статическим ресурсам
-                    request.requestMatchers(
+                            "/sound/**",
+
                             "/",
                             "/register"
-//                            "/login"
                     ).permitAll();
-//                    request.anyRequest().permitAll();
-                    request.anyRequest().hasAnyAuthority(Role.USER.getName(), Role.ADMIN.getName());
+
+                    request.anyRequest().authenticated();
+//                    request.anyRequest().hasAnyAuthority(Role.USER.getName(), Role.ADMIN.getName());
                 })
 
                 .formLogin(Customizer.withDefaults())
