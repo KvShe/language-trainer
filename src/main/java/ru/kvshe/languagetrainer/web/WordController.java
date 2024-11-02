@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.kvshe.languagetrainer.exception.NotFoundWordException;
+import ru.kvshe.languagetrainer.model.User;
 import ru.kvshe.languagetrainer.model.Word;
+import ru.kvshe.languagetrainer.service.UserService;
 import ru.kvshe.languagetrainer.service.WordService;
 import ru.kvshe.languagetrainer.util.API;
 import ru.kvshe.languagetrainer.util.sort.EnglishSortStrategy;
@@ -27,6 +29,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WordController {
     private final WordService wordService;
+    private final UserService userService;
 
     @Operation(
             summary = "Get all Words",
@@ -35,7 +38,10 @@ public class WordController {
     @API.InternalServerError
     @GetMapping
     public ModelAndView show(@RequestParam(required = false) String sort) {
-        List<Word> words = wordService.getAll();
+        String login = userService.getLoginCurrentUser();
+        User user = userService.getUserByLogin(login);
+        List<Word> words = wordService.getAllFor(user.getId());
+//        List<Word> words = wordService.getAll();
 
         if (sort != null && sort.equals("english")) {
 //            wordService.sortByEnglish(words);

@@ -5,10 +5,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.kvshe.languagetrainer.model.User;
 import ru.kvshe.languagetrainer.model.Word;
 import ru.kvshe.languagetrainer.repository.WordRepository;
 import ru.kvshe.languagetrainer.util.sort.SortStrategy;
 
+import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -19,11 +21,17 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class WordService {
     private final WordRepository wordRepository;
+    private final UserService userService;
+
     private SortStrategy sortStrategy;
     private int quantity = 10;
 
     public List<Word> getAll() {
         return wordRepository.findAll();
+    }
+
+    public List<Word> getAllFor(Long userId) {
+        return wordRepository.findAllByUserId(userId);
     }
 
     public void sortWords(List<Word> words) {
@@ -44,8 +52,21 @@ public class WordService {
         return wordRepository.findById(id);
     }
 
+    /**
+     * Метод получает login текущего пользователя.
+     * Получает текущего пользователя по login.
+     * Назначает word в поле userId - id текущего пользователя, и в поле lastUsed - текущую дату.
+     * Сохраняет word в базу данных
+     * @param word слово, которое user передал через клиента
+     * @return word, который сохранён в базе данных
+     */
     public Word save(Word word) {
+        String login = userService.getLoginCurrentUser();
+        User currentUser = userService.getUserByLogin(login);
+
+        word.setUserId(currentUser.getId());
         word.setLastUsed(LocalDate.now());
+
         return wordRepository.save(word);
     }
 

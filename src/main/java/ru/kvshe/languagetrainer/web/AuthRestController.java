@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.kvshe.languagetrainer.model.User;
 import ru.kvshe.languagetrainer.service.UserService;
 
-import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -19,8 +18,9 @@ public class AuthRestController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/current-user")
-    public String getCurrentUser(Principal principal) {
-        return principal.getName(); // возвращает имя пользователя
-    }
+//    @GetMapping("/current-user")
+//    public String getCurrentUser() {
+//        return SecurityContextHolder.getContext().getAuthentication().getName();
+//        return principal.getName(); // возвращает имя пользователя
+//    }
 }

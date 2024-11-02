@@ -25,8 +25,9 @@ public interface WordRepository extends JpaRepository<Word, Long> {
 
     /**
      * Возвращает список слов, которые не использовались более заданного времени
+     *
      * @param quantity количество записей, которые метод вернёт
-     * @param days число дней, если поле las_used отличается от текущей даты на большее количество, то эта запись будет возвращена
+     * @param days     число дней, если поле las_used отличается от текущей даты на большее количество, то эта запись будет возвращена
      * @return список слов, которые не проверялись более days
      */
     @Query(value = "select * from word where last_used < now() - cast(:days || ' days' as interval) order by random() limit :quantity", nativeQuery = true)
@@ -38,10 +39,15 @@ public interface WordRepository extends JpaRepository<Word, Long> {
 
     /**
      * Обновляет у записей поле lastUsed
+     *
      * @param dateUse дата, на которую будет обновлено поле lastUsed
-     * @param ids идентификаторы записей, у которых будет обновлено поле lastUsed
+     * @param ids     идентификаторы записей, у которых будет обновлено поле lastUsed
      */
     @Modifying
     @Query("update Word w set w.lastUsed = :dateUse where w.id in :ids")
     void updateWordsTextByIds(@Param("dateUse") LocalDate dateUse, @Param("ids") List<Long> ids);
+
+    //    @Modifying
+//    @Query("select * from Word where Word.userId = :userId")
+    List<Word> findAllByUserId(Long userId);
 }
