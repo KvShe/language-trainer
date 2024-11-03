@@ -26,6 +26,7 @@ public class LessonController {
     @GetMapping
     public ModelAndView lesson(Word word) {
         List<Word> words = lessonService.createListOfRandomWords();// todo создавать список слов, которые давно не проверялись
+        lessonService.setQuantity(words.size());
 
         if (words.isEmpty()) {
             return new ModelAndView("redirect:/words/new");

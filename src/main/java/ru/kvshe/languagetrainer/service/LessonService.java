@@ -22,7 +22,7 @@ public class LessonService implements LessonObserver {
     // variables for LessonObserver
     private int correctAnswers;
     private int wrongAnswers;
-    private int quantity = 10;
+    private int quantity;
 
     public List<Word> createListOfRandomWords() {
         words = wordService.getRandomWords();
