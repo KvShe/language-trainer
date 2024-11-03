@@ -14,7 +14,7 @@ spring:
     #    username: zheshelist
     #    password: postQazwsx258794613
 
-     render
+#     render
 #    url: jdbc:postgresql://dpg-csiufn68ii6s73cromu0-a.frankfurt-postgres.render.com:5432/kvshe # для внешнего соединения
     url: jdbc:postgresql://dpg-csiufn68ii6s73cromu0-a:5432/kvshe # для внутреннего соединения
     username: kvshe
