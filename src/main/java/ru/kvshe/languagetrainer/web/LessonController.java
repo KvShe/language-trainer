@@ -27,6 +27,10 @@ public class LessonController {
     public ModelAndView lesson(Word word) {
         List<Word> words = lessonService.createListOfRandomWords();// todo создавать список слов, которые давно не проверялись
 
+        if (words.isEmpty()) {
+            return new ModelAndView("redirect:/words/new");
+        }
+
         Collections.shuffle(words);
 
         word.setRussian(words.getFirst().getRussian());

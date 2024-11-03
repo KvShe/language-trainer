@@ -1,6 +1,6 @@
 ## Language Training
 
-### Spring Boot, Spring Web, Spring Jpa, Spring AOP, Swagger (SpringDoc OpenAPI)
+### Spring Boot, Spring Web, Spring Jpa, Spring AOP, Spring Security, Swagger (SpringDoc OpenAPI)
 
 #### made:
 
@@ -20,17 +20,30 @@
     - sorts words (Использовал паттерн Strategy):
         - by english
         - by russian
-- added postgreSQL
+    - привязку всех добавленных слов к пользователям (у каждого пользователя есть свой список слов)
+- added postgreSQL:
+    - localhost
+    - SpaceWeb
+    - render
 - added логирование в консоль через Spring AOP & Lombok
     - WordService
 - added таймер для измерения времени выполнения метода
     - WordService
+- если список слов пользователя пуст, то ручка "Начать занятие" перенаправляет запрос на страницу с добавлением нового слова
 
 ---
 
 #### to-do list:
 
+- add buttons:
+    - регистрация
+    - войти
+    - выйти
+- fix неправильно отображение прогресса
+- add in controller ручку guidebook, для описания сервиса
 - add банк слов, которые давно не проверялись
+  - если слов нет - кнопка не активна
+  - если слова есть - рядом с кнопкой появляется цифра
 - add в меню кнопку выключения приложения
 - add pagination
     - ленивая загрузка или infinite scroll

@@ -17,8 +17,14 @@ public interface WordRepository extends JpaRepository<Word, Long> {
      *
      * @return список случайных слов
      */
-    @Query(value = "select * from word order by random() limit :quantity", nativeQuery = true)
-    List<Word> findRandomWords(@Param("quantity") int quantity);
+//    @Query(value = "select * from word order by random() limit :quantity", nativeQuery = true)
+//    List<Word> findRandomWords(@Param("quantity") int quantity);
+
+//    @Query(value = "select * from word order by random() limit :quantity", nativeQuery = true)
+//    List<Word> findRandomWordsForUserId(@Param("quantity") int quantity, @Param("userId") Long userId);
+
+    @Query(value = "select * from word where user_id = :userId order by random() limit :quantity", nativeQuery = true)
+    List<Word> findRandomWordsForUserId(@Param("userId") Long userId, @Param("quantity") int quantity);
 
 //    @Query(value = "select * from word where last_used < now() - interval '5 days' order by random() limit :quantity", nativeQuery = true)
 //    List<Word> findRandomWordsNotUsedInLastFiveDays(@Param("quantity") int quantity);

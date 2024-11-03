@@ -16,7 +16,7 @@ public class AuthController {
 
     @GetMapping("/register")
     public ModelAndView showRegisterForm() {
-        return new ModelAndView("auth/register")
+        return new ModelAndView("auth/register-1")
                 .addObject("user", new User());
     }
 

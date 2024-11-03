@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link media="all" rel="stylesheet" th:href="@{/css/register-style-1.css}" type="text/css">
+    <title>Регистрация</title>
+</head>
+<body>
+<div id="wrapper">
+    <form id="signin" method="post" th:action="@{/register}" th:object="${user}" autocomplete="off">
+        <label for="user"></label>
+        <input type="text" id="user" th:field="*{login}" placeholder="Логин"/>
+
+        <label for="pass"></label>
+        <input type="password" id="pass" name="pass" th:field="*{password}" placeholder="Пароль"/>
+
+        <button type="submit">&#xf0da;</button>
+        <!--        <p>забыли пароль? <a href="#">click here</a></p>-->
+    </form>
+</div>
+
+
+<div class="container">
+    <section id="content">
+        <form th:action="@{/register}" method="post" th:object="${user}">
+            <h1>Регистрация</h1>
+            <div>
+                <input th:field="*{login}" type="text" placeholder="Логин" required="" id="username"/>
+            </div>
+            <div>
+                <input th:field="*{password}" type="password" placeholder="Пароль" required="" id="password"/>
+            </div>
+            <div>
+                <input type="submit" value="Регистрация"/>
+<!--                <a href="#">Lost your password?</a>-->
+                <a href="#">Войти</a>
+            </div>
+        </form><!-- form -->
+
+    </section><!-- content -->
+</div><!-- container -->
+</body>
+</html>

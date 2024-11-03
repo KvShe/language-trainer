@@ -10,7 +10,6 @@ import ru.kvshe.languagetrainer.model.Word;
 import ru.kvshe.languagetrainer.repository.WordRepository;
 import ru.kvshe.languagetrainer.util.sort.SortStrategy;
 
-import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +23,7 @@ public class WordService {
     private final UserService userService;
 
     private SortStrategy sortStrategy;
-    private int quantity = 10;
+    private int quantity = 10; // количество слов в одном уроке
 
     public List<Word> getAll() {
         return wordRepository.findAll();
@@ -39,13 +38,14 @@ public class WordService {
     }
 
     /**
-     * Метод возвращает список из случайных слов в количестве quantity
+     * Метод получает текущего user.
+     * Возвращает список из случайных слов в количестве quantity для текущего user
      *
-     * @return список из случайных слов
+     * @return список из случайных слов для текущего пользователя
      */
     public List<Word> getRandomWords() {
-        int quantity = 10;
-        return wordRepository.findRandomWords(quantity);
+        Long userId = userService.getCurrentUser().getId();
+        return wordRepository.findRandomWordsForUserId(userId, quantity);
     }
 
     public Optional<Word> getById(Long id) {
@@ -53,16 +53,15 @@ public class WordService {
     }
 
     /**
-     * Метод получает login текущего пользователя.
-     * Получает текущего пользователя по login.
+     * Метод получает текущего пользователя.
      * Назначает word в поле userId - id текущего пользователя, и в поле lastUsed - текущую дату.
      * Сохраняет word в базу данных
+     *
      * @param word слово, которое user передал через клиента
      * @return word, который сохранён в базе данных
      */
     public Word save(Word word) {
-        String login = userService.getLoginCurrentUser();
-        User currentUser = userService.getUserByLogin(login);
+        User currentUser = userService.getCurrentUser();
 
         word.setUserId(currentUser.getId());
         word.setLastUsed(LocalDate.now());

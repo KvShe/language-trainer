@@ -20,6 +20,7 @@ public class UserService {
 
     /**
      * Метод получает login текущего пользователя из SecurityContextHolder
+     *
      * @return login текущего пользователя
      */
     public String getLoginCurrentUser() {
@@ -32,6 +33,10 @@ public class UserService {
     public User getUserByLogin(String login) {
         return userRepository.findAllByLogin(login)
                 .orElseThrow(() -> new UsernameNotFoundException("User with login " + login + " not found"));
+    }
+
+    public User getCurrentUser() {
+        return getUserByLogin(getLoginCurrentUser());
     }
 
     public User save(User user) {

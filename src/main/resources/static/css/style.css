@@ -120,3 +120,7 @@ table {
     inset 0 2px 5px rgba(0, 0, 0, 0.1); /* нижняя внутренняя тень */
     transition: width 0.5s ease; /* плавное изменение ширины */
 }
+
+.menu {
+    width: 25vw;
+}
