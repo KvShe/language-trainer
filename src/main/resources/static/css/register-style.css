@@ -1,119 +1,100 @@
 /* Reset CSS */
-*,
-*::before,
-*::after {
+* {
 	margin: 0;
 	padding: 0;
-	border: 0;
-	outline: 0;
-	font-size: 100%;
-	vertical-align: baseline;
-	background: transparent;
+	box-sizing: border-box;
 }
 
 body {
 	background: #DCDDDF url(https://cssdeck.com/uploads/media/items/7/7AF2Qzt.png);
 	color: #000;
 	font: 14px Arial, sans-serif;
-	margin: 0 auto;
 	padding: 0;
-	position: relative;
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+h1 {
 	color: #563D64;
+	font-size: 28px;
 	margin-bottom: 10px;
 }
-h1 { font-size: 28px; }
+
 h2 { font-size: 26px; }
 h3 { font-size: 18px; }
 h4 { font-size: 16px; }
 h5 { font-size: 14px; }
 h6 { font-size: 12px; }
-small { font-size: 10px; }
-b, strong { font-weight: bold; }
 
 a {
 	text-decoration: none;
 	color: inherit;
 }
-a:hover { text-decoration: underline; }
 
-/* Utility classes */
-.left { float: left; }
-.right { float: right; }
-.clearfix::after {
-	content: "";
-	display: block;
-	clear: both;
-}
+a:hover { text-decoration: underline; }
 
 /* Layout */
 .container {
 	margin: 25px auto;
 	width: 900px;
-	position: relative;
 }
+
 #content {
-	background: linear-gradient(to bottom, #f8f8f8 0%, #f9f9f9 100%);
+	background: linear-gradient(to bottom, #f8f8f8, #f9f9f9);
 	box-shadow: 0 1px 0 #fff inset;
 	border: 1px solid #c4c6ca;
 	margin: 0 auto;
 	padding: 25px 0;
 	text-align: center;
-	text-shadow: 0 1px 0 #fff;
 	width: 400px;
-	position: relative;
 }
+
 #content h1 {
 	color: #7E7E7E;
 	font: bold 25px Helvetica, Arial, sans-serif;
-	letter-spacing: -0.05em;
 	margin: 10px 0 30px;
 	position: relative;
 }
+
 #content h1::before,
 #content h1::after {
 	content: "";
 	height: 1px;
 	position: absolute;
 	width: 27%;
-	background: linear-gradient(to right, #7E7E7E 0%, #FFF 100%);
+	background: linear-gradient(to right, #7E7E7E, #FFF);
 	top: 10px;
 }
+
 #content h1::before { left: 0; }
 #content h1::after { right: 0; }
 
 /* Form fields */
 #content form {
 	margin: 0 20px;
-	position: relative;
 }
+
 #content form input[type="text"],
 #content form input[type="password"] {
 	border: 1px solid #c8c8c8;
-	padding: 15px 10px 15px 40px;
+	padding: 15px 40px 15px 10px;
 	width: 80%;
 	border-radius: 3px;
-	box-shadow: 0 1px 0 #fff inset, 0 -2px 5px rgba(0,0,0,0.08) inset;
 	background: #eae7e7 url(https://cssdeck.com/uploads/media/items/8/8bcLQqF.png) no-repeat 10px 10px;
 	color: #777;
 	font: 13px Helvetica, Arial, sans-serif;
-	transition: box-shadow 0.5s ease, background-color 0.5s ease, border-color 0.5s ease;
+	transition: box-shadow 0.5s, border-color 0.5s;
 	margin-bottom: 10px;
 }
-#content form input[type="text"]:focus,
-#content form input[type="password"]:focus {
+
+#content form input:focus {
 	box-shadow: 0 0 2px #ed1c24 inset;
 	background-color: #fff;
 	border-color: #ed1c24;
-	outline: none;
 }
 
 /* Submit button */
 #content form input[type="submit"] {
-	background: linear-gradient(to bottom, #fee79a 0%, #fec151 100%);
+	background: linear-gradient(to bottom, #fee79a, #fec151);
 	border: 1px solid #D69E31;
 	color: #85592e;
 	cursor: pointer;
@@ -121,13 +102,12 @@ a:hover { text-decoration: underline; }
 	height: 35px;
 	width: 120px;
 	border-radius: 30px;
-	box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
-	text-shadow: 0 1px 0 rgba(255,255,255,0.5);
-	transition: background 0.3s ease;
+	transition: background 0.3s;
 	margin: 20px 15px 35px;
 }
+
 #content form input[type="submit"]:hover {
-	background: linear-gradient(to bottom, #fec151 0%, #fee79a 100%);
+	background: linear-gradient(to bottom, #fec151, #fee79a);
 }
 
 /* Additional link */
@@ -137,26 +117,4 @@ a:hover { text-decoration: underline; }
 	text-decoration: underline;
 	float: right;
 	margin: 30px 15px 0 0;
-}
-
-/* Button styling */
-.button {
-	background: linear-gradient(to bottom, #f7f9fa 0%, #f0f0f0 100%);
-	box-shadow: 0 1px 2px rgba(0,0,0,0.1) inset;
-	border-top: 1px solid #CFD5D9;
-	border-radius: 0 0 5px 5px;
-	padding: 15px 0;
-	text-align: center;
-}
-.button a {
-	background: url(https://cssdeck.com/uploads/media/items/8/8bcLQqF.png) 0 -112px no-repeat;
-	color: #7E7E7E;
-	font-size: 17px;
-	padding: 2px 0 2px 40px;
-	text-decoration: none;
-	transition: color 0.3s ease, background-position 0.3s ease;
-}
-.button a:hover {
-	background-position: 0 -135px;
-	color: #00aeef;
 }
