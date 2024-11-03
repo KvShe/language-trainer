@@ -16,13 +16,23 @@ public class AuthController {
 
     @GetMapping("/register")
     public ModelAndView showRegisterForm() {
-        return new ModelAndView("auth/register-1")
+        return new ModelAndView("/auth/register")
                 .addObject("user", new User());
     }
 
     @PostMapping("/register")
     public ModelAndView createNewUser(@ModelAttribute("user") User user) {
         userService.save(user);
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/login");
+    }
+
+    @GetMapping("/login")
+    public ModelAndView showLoginForm() {
+        return new ModelAndView("/auth/login");
+    }
+
+    @PostMapping("/login")
+    public ModelAndView login(@ModelAttribute("user") User user) {
+        return new ModelAndView("/auth/login");
     }
 }
