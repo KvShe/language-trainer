@@ -10,30 +10,21 @@
 </head>
 <body>
 <div class="container">
-    <section id="content">
-        <form th:action="@{/login}" method="post">
-            <h1>Вход</h1>
-            <div>
-                <label for="username"></label>
-                <input type="text" id="username" name="username" placeholder="Логин" required>
-            </div>
-            <div>
-                <label for="password"></label>
-                <input type="password" id="password" name="password" placeholder="Пароль" required>
-            </div>
-            <div th:if="${param.error}" style="color: red;">
-                <p>Неверное имя пользователя или пароль</p>
-            </div>
-            <div>
-                <input type="submit" value="Войти"/>
-                <!--                <a href="#">Lost your password?</a>-->
-                <a href="/register">Регистрация</a>
-            </div>
-            <div th:if="${param.logout}">
-                <p style="color: green;">You have been logged out</p>
-            </div>
-        </form>
-    </section>
+    <h1>Вход</h1>
+    <form action="/login" method="post">
+        <div class="input-group">
+            <label for="username">Логин</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="input-group">
+            <label for="password">Пароль</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Войти</button>
+        <div class="register-link">
+            <a href="/register">Регистрация</a>
+        </div>
+    </form>
 </div>
 </body>
 </html>
