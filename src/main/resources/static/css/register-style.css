@@ -1,120 +1,94 @@
-/* Reset CSS */
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-	background: #DCDDDF url(https://cssdeck.com/uploads/media/items/7/7AF2Qzt.png);
-	color: #000;
-	font: 14px Arial, sans-serif;
-	padding: 0;
+    background: #c8ced5;
+    color: #000;
+    font: 14px Arial, sans-serif;
 }
 
-/* Typography */
 h1 {
-	color: #563D64;
-	font-size: 28px;
-	margin-bottom: 10px;
-}
-
-h2 { font-size: 26px; }
-h3 { font-size: 18px; }
-h4 { font-size: 16px; }
-h5 { font-size: 14px; }
-h6 { font-size: 12px; }
-
-a {
-	text-decoration: none;
-	color: inherit;
-}
-
-a:hover { text-decoration: underline; }
-
-/* Layout */
-.container {
-	margin: 25px auto;
-	width: 900px;
+    color: #8a856c;
+    font-size: 28px;
+    margin-bottom: 10px;
+    position: relative;
+    font-weight: bold;
 }
 
 #content {
-	background: linear-gradient(to bottom, #f8f8f8, #f9f9f9);
-	box-shadow: 0 1px 0 #fff inset;
-	border: 1px solid #c4c6ca;
-	margin: 0 auto;
-	padding: 25px 0;
-	text-align: center;
-	width: 400px;
-}
-
-#content h1 {
-	color: #7E7E7E;
-	font: bold 25px Helvetica, Arial, sans-serif;
-	margin: 10px 0 30px;
-	position: relative;
+    margin: 25px auto;
+    width: 400px;
+    padding: 25px 0;
+    background: linear-gradient(to bottom, #f8f8f8, #f9f9f9);
+    box-shadow: 0 1px 0 #fff inset;
+    border: 1px solid #c4c6ca;
+    text-align: center;
 }
 
 #content h1::before,
 #content h1::after {
-	content: "";
-	height: 1px;
-	position: absolute;
-	width: 27%;
-	background: linear-gradient(to right, #7E7E7E, #FFF);
-	top: 10px;
+    content: "";
+    height: 1px;
+    width: 27%;
+    position: absolute;
+    background: linear-gradient(to right, #7E7E7E, #FFF);
+    top: 10px;
 }
 
-#content h1::before { left: 0; }
-#content h1::after { right: 0; }
-
-/* Form fields */
-#content form {
-	margin: 0 20px;
+#content h1::before {
+    left: 0;
 }
 
-#content form input[type="text"],
-#content form input[type="password"] {
-	border: 1px solid #c8c8c8;
-	padding: 15px 40px 15px 10px;
-	width: 80%;
-	border-radius: 3px;
-	background: #eae7e7 url(https://cssdeck.com/uploads/media/items/8/8bcLQqF.png) no-repeat 10px 10px;
-	color: #777;
-	font: 13px Helvetica, Arial, sans-serif;
-	transition: box-shadow 0.5s, border-color 0.5s;
-	margin-bottom: 10px;
+#content h1::after {
+    right: 0;
 }
 
-#content form input:focus {
-	box-shadow: 0 0 2px #ed1c24 inset;
-	background-color: #fff;
-	border-color: #ed1c24;
+form {
+    margin: 0 20px;
 }
 
-/* Submit button */
-#content form input[type="submit"] {
-	background: linear-gradient(to bottom, #fee79a, #fec151);
-	border: 1px solid #D69E31;
-	color: #85592e;
-	cursor: pointer;
-	font: bold 15px Helvetica, Arial, sans-serif;
-	height: 35px;
-	width: 120px;
-	border-radius: 30px;
-	transition: background 0.3s;
-	margin: 20px 15px 35px;
+input[type="text"],
+input[type="password"] {
+    width: 80%;
+    padding: 15px 10px 15px 40px;
+    border: 1px solid #c8c8c8;
+    border-radius: 3px;
+    background: #e0dede no-repeat 10px 10px;
+    color: #777;
+    transition: box-shadow 0.5s, border-color 0.5s;
+    margin-bottom: 10px;
 }
 
-#content form input[type="submit"]:hover {
-	background: linear-gradient(to bottom, #fec151, #fee79a);
+input:focus {
+    box-shadow: 0 0 2px #ed1c24 inset;
+    background-color: #fff;
+    border-color: #ed1c24;
 }
 
-/* Additional link */
-#content form div a {
-	color: #004a80;
-	font-size: 12px;
-	text-decoration: underline;
-	float: right;
-	margin: 30px 15px 0 0;
+input[type="submit"] {
+    width: 120px;
+    height: 35px;
+    margin: 20px 15px 35px;
+    border-radius: 30px;
+    background: linear-gradient(to bottom, #fee79a, #fec151);
+    border: 1px solid #D69E31;
+    color: #85592e;
+    cursor: pointer;
+    font: bold 15px Helvetica, Arial, sans-serif;
+    transition: background 0.3s;
+}
+
+input[type="submit"]:hover {
+    background: linear-gradient(to bottom, #fec151, #fee79a);
+}
+
+a {
+    color: #004a80;
+    font-size: 12px;
+    text-decoration: underline;
+    float: right;
+    margin: 30px 15px 0 0;
 }
