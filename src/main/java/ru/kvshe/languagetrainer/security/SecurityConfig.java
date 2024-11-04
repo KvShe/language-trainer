@@ -39,14 +39,12 @@ public class SecurityConfig {
                     request.anyRequest().authenticated();
                 })
 
-                .formLogin(Customizer.withDefaults())
-
-//                .formLogin(request -> {
-//                    request.loginPage("/login");
-//                    request.failureUrl("/login?error");
-//                    request.defaultSuccessUrl("/");
-//                    request.permitAll();
-//                })
+                .formLogin(request -> {
+                    request.loginPage("/login");
+                    request.failureUrl("/login?error");
+                    request.defaultSuccessUrl("/");
+                    request.permitAll();
+                })
 
 //                .logout(request -> {
 //                    request.logoutUrl("/logout"); // url для запроса выхода

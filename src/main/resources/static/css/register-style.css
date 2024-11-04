@@ -1,103 +1,91 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css');
-*{
-    font-family: 'Open Sans', 'sans-serif', 'FontAwesome';
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-body{
-    background: rgb(52, 56, 61);
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
-h1{
-    color: rgb(255, 255, 255);
-    margin: 20px auto 0;
-    width: 200px;
-    text-align: center;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
 }
-#wrapper{
-    position: absolute;
-    width: 320px;
-    left: 50%;
-    margin-left: -160px;
-    top: 50%;
-    margin-top: -75px;
-}
-/* === Sign in Form === */
-#signin {
-    height: 90px;
-    width: 300px;
+
+.form-container {
+    background-color: #fff;
+    padding: 20px;
     border-radius: 8px;
-    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin: 20px 0;
 }
-#signin::before {
-    display: block;
-    position: relative;
-    height: 2px;
-    background: rgb(52, 56, 61);
-    content: '';
-    top: 44px;
-    margin-left: 20px;
-    z-index: 1;
-}
-#signin input:first-of-type{
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
-}
-#signin input:last-of-type{
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
-}
-#signin  input[type="text"], #signin  input[type="password"], #signin button[type="submit"]{
-    background: rgb(28, 30, 33);
-    box-shadow: inset -100px -100px 0 rgb(28, 30, 33); /*Prevent yellow autofill color*/
-    color: rgb(52, 56, 61);
-}
-#signin  input[type="text"], #signin  input[type="password"]{
-    position: relative;
-    display: block;
-    width: 280px;
-    height: 45px;
-    border: 0;
-    outline: 0;
-    top: -2px;
-    padding: 0 0 0 20px;
-    font-weight: 700;
-}
-#signin  input[type="text"]:focus, #signin  input[type="password"]:focus{
-    color: rgb(255, 255, 255);
-}
-#signin button[type="submit"]{
-    display: block;
-    position: absolute;
-    width: 52px;
-    height: 52px;
-    color: rgb(52, 56, 61);
-    border-radius: 50px;
-    outline: 0;
-    z-index: 2;
-    top: 19px;
-    right: -24px;
-    border: 6px solid rgb(52, 56, 61);
-    font-size: 25px;
-    text-indent: 0;
-    padding-left: 9px;
-    padding-bottom: 3px;
+
+.form-container h2 {
     text-align: center;
+    margin-bottom: 20px;
+    color: #333;
 }
-#signin button[type="submit"]:hover{
-    color: rgb(0, 126, 165);
-    text-shadow: 0 0 10px rgb(0, 126, 165);
+
+label {
+    font-size: 14px;
+    color: #666;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #5cb85c;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
-#signin p {
-    color: rgb(79, 85, 97);
-    padding: 0 20px;
-    font-weight: 700;
-    font-size: 12px;
-    margin: 5px 0 0 0;
+
+button:hover {
+    background-color: #4cae4c;
 }
-#signin p > a{
-    color: rgb(111, 119, 135);
+
+p {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+p a {
+    color: #5cb85c;
     text-decoration: none;
 }
-#signin p > a:hover{
-    border-bottom: 1px solid;
+
+p a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    color: #d9534f;
+    text-align: center;
+    margin-top: 10px;
 }
