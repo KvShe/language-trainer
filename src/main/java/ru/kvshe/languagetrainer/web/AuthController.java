@@ -16,7 +16,7 @@ public class AuthController {
 
     @GetMapping("/register")
     public ModelAndView showRegisterForm() {
-        return new ModelAndView("/auth/register")
+        return new ModelAndView("auth/register")
                 .addObject("user", new User());
     }
 
@@ -28,11 +28,11 @@ public class AuthController {
 
     @GetMapping("/login")
     public ModelAndView showLoginForm() {
-        return new ModelAndView("/auth/login");
+        return new ModelAndView("auth/login");
     }
 
     @PostMapping("/login")
     public ModelAndView login(@ModelAttribute("user") User user) {
-        return new ModelAndView("/auth/login");
+        return new ModelAndView("auth/login");
     }
 }
