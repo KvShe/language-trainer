@@ -48,10 +48,10 @@ public class SecurityConfig {
 //                    request.permitAll();
 //                })
 
-                .logout(request -> {
-                    request.logoutUrl("/logout"); // url для запроса выхода
-                    request.logoutSuccessUrl("/"); // url для перенаправления после успешного выхода
-                })
+//                .logout(request -> {
+//                    request.logoutUrl("/logout"); // url для запроса выхода
+//                    request.logoutSuccessUrl("/"); // url для перенаправления после успешного выхода
+//                })
 
                 .build();
     }

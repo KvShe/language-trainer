@@ -1,87 +1,103 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css');
+*{
+    font-family: 'Open Sans', 'sans-serif', 'FontAwesome';
 }
-
-body {
-    /*background: #DCDDDF url(https://cssdeck.com/uploads/media/items/7/7AF2Qzt.png) no-repeat center center fixed;*/
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+body{
+    background: rgb(52, 56, 61);
 }
-
-.container {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    width: 300px;
+h1{
+    color: rgb(255, 255, 255);
+    margin: 20px auto 0;
+    width: 200px;
     text-align: center;
 }
-
-h1 {
-    color: #563D64;
-    margin-bottom: 20px; /* Отступ между заголовком и следующими элементами */
+#wrapper{
+    position: absolute;
+    width: 320px;
+    left: 50%;
+    margin-left: -160px;
+    top: 50%;
+    margin-top: -75px;
 }
-
-.input-group {
-    margin-bottom: 15px;
-    text-align: left;
+/* === Sign in Form === */
+#signin {
+    height: 90px;
+    width: 300px;
+    border-radius: 8px;
+    position: relative;
 }
-
-label {
+#signin::before {
     display: block;
-    margin-bottom: 5px;
-    color: #333;
+    position: relative;
+    height: 2px;
+    background: rgb(52, 56, 61);
+    content: '';
+    top: 44px;
+    margin-left: 20px;
+    z-index: 1;
 }
-
-input[type="text"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
+#signin input:first-of-type{
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
 }
-
-input[type="text"]:focus,
-input[type="password"]:focus {
-    border-color: #ed1c24;
-    outline: none;
+#signin input:last-of-type{
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
 }
-
-button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    background: linear-gradient(to bottom, #fee79a, #fec151);
-    color: #85592e;
-    font-weight: bold;
+#signin  input[type="text"], #signin  input[type="password"], #signin button[type="submit"]{
+    background: rgb(28, 30, 33);
+    box-shadow: inset -100px -100px 0 rgb(28, 30, 33); /*Prevent yellow autofill color*/
+    color: rgb(52, 56, 61);
+}
+#signin  input[type="text"], #signin  input[type="password"]{
+    position: relative;
+    display: block;
+    width: 280px;
+    height: 45px;
+    border: 0;
+    outline: 0;
+    top: -2px;
+    padding: 0 0 0 20px;
+    font-weight: 700;
+}
+#signin  input[type="text"]:focus, #signin  input[type="password"]:focus{
+    color: rgb(255, 255, 255);
+}
+#signin button[type="submit"]{
+    display: block;
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    color: rgb(52, 56, 61);
+    border-radius: 50px;
+    outline: 0;
+    z-index: 2;
+    top: 19px;
+    right: -24px;
+    border: 6px solid rgb(52, 56, 61);
+    font-size: 25px;
+    text-indent: 0;
+    padding-left: 9px;
+    padding-bottom: 3px;
+    text-align: center;
+}
+#signin button[type="submit"]:hover{
+    color: rgb(0, 126, 165);
+    text-shadow: 0 0 10px rgb(0, 126, 165);
     cursor: pointer;
-    transition: background 0.3s;
-    margin-top: 10px; /* Отступ между кнопкой и ссылкой */
 }
-
-button:hover {
-    background: linear-gradient(to bottom, #fec151, #fee79a);
+#signin p {
+    color: rgb(79, 85, 97);
+    padding: 0 20px;
+    font-weight: 700;
+    font-size: 12px;
+    margin: 5px 0 0 0;
 }
-
-.login-link,
-.register-link {
-    margin-top: 20px; /* Увеличенный отступ для ссылок */
-}
-
-.login-link a,
-.register-link a {
-    color: #004a80;
+#signin p > a{
+    color: rgb(111, 119, 135);
     text-decoration: none;
 }
-
-.login-link a:hover,
-.register-link a:hover {
-    text-decoration: underline;
+#signin p > a:hover{
+    border-bottom: 1px solid;
 }
