@@ -46,6 +46,7 @@ table {
     margin-bottom: 1vh;
     display: flex;
     justify-content: center;
+    align-items: center; /* Добавляем выравнивание по вертикали */
     gap: 20px;
     background: aliceblue;
 }
@@ -65,25 +66,16 @@ table {
     margin: 0 auto;
 }
 
-/*.content {*/
-/*    padding: 20px;*/
-/*    margin-bottom: 1vh;*/
-/*    font-size: 25px;*/
-/*    background: aliceblue;*/
-/*    border-radius: 50px;*/
-/*    color: darkcyan;*/
-/*}*/
-
 .content {
     text-align: center;
     padding: 20px;
     margin-bottom: 1vh;
     font-size: 25px;
-    background: aliceblue;
+    background: linear-gradient(145deg, #d4e4ec, #ffffff); /* Лёгкий градиент для объёмного эффекта */
     border-radius: 50px;
     color: darkcyan;
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2), -6px -6px 12px rgba(255, 255, 255, 0.5); /* Тень для объёма */
 }
-
 
 .list {
     height: 80vh;
@@ -92,6 +84,10 @@ table {
 .to_main {
     text-align: center;
     font-size: 15px;
+}
+
+.left {
+    text-align: left;
 }
 
 .right {
