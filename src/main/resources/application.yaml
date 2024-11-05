@@ -37,6 +37,6 @@ spring:
         enabled: true
 
   thymeleaf:
-    prefix: classpath:/templates/
-    suffix: .html
+#    prefix: classpath:/templates/
+#    suffix: .html
     cache: false

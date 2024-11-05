@@ -24,6 +24,7 @@ public class WordService {
 
     private SortStrategy sortStrategy;
     private int quantity = 10; // количество слов в одном уроке
+    private int days = 2;
 
     public List<Word> getAll() {
         return wordRepository.findAll();
@@ -92,13 +93,18 @@ public class WordService {
         wordRepository.updateWordsTextByIds(LocalDate.now(), ids);
     }
 
-//    public List<Word> sortByEnglish(List<Word> words) {
-//        words.sort(Comparator.comparing(Word::getEnglish));
-//        return words;
-//    }
-//
-//    public List<Word> sortByRussian(List<Word> words) {
-//        words.sort(Comparator.comparing(Word::getRussian));
-//        return words;
-//    }
+    public int getCountForgottenWords() {
+        Long id = userService.getCurrentUser().getId();
+
+        return wordRepository.countWordsNotUsedInLastDaysForUser(id, days);
+    }
+
+    /**
+     * @return
+     */
+    public List<Word> getForgottenWords() {
+        Long id = userService.getCurrentUser().getId();
+
+        return wordRepository.findRandomWordsNotUsedInLastDaysForUser(id, quantity, days);
+    }
 }

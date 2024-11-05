@@ -13,16 +13,12 @@ import java.util.List;
 @Repository
 public interface WordRepository extends JpaRepository<Word, Long> {
     /**
-     * Возвращает список случайных слов в количестве quantity
+     * Возвращает список случайных слов в количестве quantity для user с id - userId
      *
+     * @param userId   идентификатор пользователя
+     * @param quantity количество, записей, которые вернутся из базы данных
      * @return список случайных слов
      */
-//    @Query(value = "select * from word order by random() limit :quantity", nativeQuery = true)
-//    List<Word> findRandomWords(@Param("quantity") int quantity);
-
-//    @Query(value = "select * from word order by random() limit :quantity", nativeQuery = true)
-//    List<Word> findRandomWordsForUserId(@Param("quantity") int quantity, @Param("userId") Long userId);
-
     @Query(value = "select * from word where user_id = :userId order by random() limit :quantity", nativeQuery = true)
     List<Word> findRandomWordsForUserId(@Param("userId") Long userId, @Param("quantity") int quantity);
 
@@ -32,12 +28,25 @@ public interface WordRepository extends JpaRepository<Word, Long> {
     /**
      * Возвращает список слов, которые не использовались более заданного времени
      *
+     * @param userId идентификатор пользователя
      * @param quantity количество записей, которые метод вернёт
      * @param days     число дней, если поле las_used отличается от текущей даты на большее количество, то эта запись будет возвращена
      * @return список слов, которые не проверялись более days
      */
-    @Query(value = "select * from word where last_used < now() - cast(:days || ' days' as interval) order by random() limit :quantity", nativeQuery = true)
-    List<Word> findRandomWordsNotUsedInLastDays(@Param("quantity") int quantity, @Param("days") int days);
+    @Query(value = "select * from word where user_id = :userId and last_used < now() - cast(:days || ' days' as interval) order by random() limit :quantity", nativeQuery = true)
+    List<Word> findRandomWordsNotUsedInLastDaysForUser(@Param("userId") Long userId, @Param("quantity") int quantity, @Param("days") int days);
+//    @Query(value = "select * from word where last_used < now() - cast(:days || ' days' as interval) order by random() limit :quantity", nativeQuery = true)
+//    List<Word> findRandomWordsNotUsedInLastDays(@Param("quantity") int quantity, @Param("days") int days);
+
+    /**
+     * Метод количество слов, которые не использовались более days для user с id - userId
+     * @param userId идентификатор пользователя
+     * @param days число дней, если поле las_used отличается от текущей даты на большее количество, то эта запись будет возвращена
+     * @return количество слов, которые не использовались более указанного количества дней
+     */
+    @Query(value = "select count(*) from word where user_id = :userId and last_used < now() - cast(:days || ' days' as interval)", nativeQuery = true)
+    int countWordsNotUsedInLastDaysForUser(@Param("userId") Long userId, @Param("days") int days);
+
 
 //    @Modifying
 //    @Query("update Word set Word.lastUsed = :data")

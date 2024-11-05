@@ -35,8 +35,13 @@
 
 <h1>Language Trainer</h1>
 <div class="center">
-    <p class="content"><a href="/lesson">Начать занятие</a></p>
-    <p class="content"><a href="/lesson">Забытые слова</a></p>
+    <div class="content-links">
+        <p class="content"><a href="/lesson">Начать занятие</a></p>
+        <p class="content">
+            <a href="#" th:if="${count == 0}" class="inactive-link">Забытые слова</a>
+            <a th:if="${count != 0}" href="/lesson" th:text="'Забытые слова ' + ${count}"></a>
+        </p>
+    </div>
     <p class="content"><a href="/words">Показать список всех слов</a></p>
     <p class="content"><a href="/words/new">Добавить новое слово</a></p>
 </div>

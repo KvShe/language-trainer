@@ -43,6 +43,9 @@ table {
     justify-content: space-between; /* Разделяем левую и правую секции */
     align-items: center; /* Центрируем по вертикали */
     background: aliceblue;
+
+    background: linear-gradient(145deg, #d4e4ec, #ffffff); /* Лёгкий градиент для объёмного эффекта */
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2), -6px -6px 12px rgba(255, 255, 255, 0.5); /* Тень для объёма */
 }
 
 .left-section, .right-section {
@@ -76,10 +79,27 @@ table {
     padding: 20px;
     margin-bottom: 1vh;
     font-size: 25px;
-    background: linear-gradient(145deg, #d4e4ec, #ffffff); /* Лёгкий градиент для объёмного эффекта */
     border-radius: 50px;
     color: darkcyan;
+
+    flex: 1;
+
+    background: linear-gradient(145deg, #d4e4ec, #ffffff); /* Лёгкий градиент для объёмного эффекта */
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2), -6px -6px 12px rgba(255, 255, 255, 0.5); /* Тень для объёма */
+}
+
+.content-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: fit-content; /* Контейнер будет иметь ширину, равную содержимому */
+    margin: 0 auto; /* Выровнять по центру */
+}
+
+.content-links {
+    display: flex;
+    justify-content: space-between; /* Равномерное распределение ссылок по ширине */
+    width: 100%; /* Занимает всю ширину */
 }
 
 .list {
@@ -123,4 +143,10 @@ table {
 
 .menu {
     width: 25vw;
+}
+
+.inactive-link {
+    color: gray;
+    pointer-events: none;
+    cursor: default;
 }
