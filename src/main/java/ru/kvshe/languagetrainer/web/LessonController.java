@@ -41,6 +41,20 @@ public class LessonController {
     }
 
     @Operation(
+            summary = "Получить список забытых слов",
+            description = "Формирует список слов из тех, которые не проверялись более 2-х дней и возвращает страницу с проверкой первого слова")
+    @GetMapping("/forgotten")
+    public ModelAndView forgotten(Word word) {
+        List<Word> words = lessonService.getForgottenWords();
+        lessonService.setQuantity(words.size());
+
+        word.setRussian(words.getFirst().getRussian());
+        return new ModelAndView("lesson/show")
+                .addObject("words", words)
+                .addObject("progress", 0);
+    }
+
+    @Operation(
             summary = "Возвращает страницу с уроком",
             description = """
                     Получает список слов, которые проверятся

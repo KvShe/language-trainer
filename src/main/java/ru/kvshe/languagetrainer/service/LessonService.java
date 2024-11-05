@@ -29,6 +29,11 @@ public class LessonService implements LessonObserver {
         return words;
     }
 
+    public List<Word> getForgottenWords() {
+        words = wordService.getForgottenWords();
+        return words;
+    }
+
     public boolean checkWord(Word word) {
         // Сравнивает строки english
         boolean result = clearAwayDebris(word).getEnglish().equals(words.getFirst().getEnglish().toLowerCase());
