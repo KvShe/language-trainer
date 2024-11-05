@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,15 +9,27 @@
     <link rel="icon" href="/img/l-t.png" type="image/x-icon">
     <link media="all" rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
     <title>Language trainer</title>
-
 </head>
-<body class="center-table">
-<header class="header">
-    <a class="header_link" href="/">
-        <img src="/img/l-t.png" alt="lt">
 
-    </a>
-    <a class="header_link" href="/words">Список слов</a>
+<body class="center-table">
+
+<header class="header">
+    <div class="left-section center">
+        <a class="header_link" href="/">
+            <img src="/img/l-t.png" alt="lt">
+        </a>
+        <a class="header_link" href="/words">Список слов</a>
+    </div>
+    <div class="right-section center">
+        <span th:if="${#authorization.expression('isAuthenticated()')}" class="guest-links">
+            <a class="header_link" th:text="${#authentication.name}" href="#"></a>
+            <a class="header_link" href="/logout">Выйти</a>
+        </span>
+        <span th:if="${#authorization.expression('isAnonymous()')}" class="guest-links">
+            <a class="header_link" href="/login">Вход</a>
+            <a class="header_link" href="/register">Регистрация</a>
+        </span>
+    </div>
 </header>
 <p class="right" th:text="'ip: ' + ${ip}"></p>
 
@@ -28,4 +41,5 @@
     <p class="content"><a href="/words/new">Добавить новое слово</a></p>
 </div>
 </body>
+
 </html>

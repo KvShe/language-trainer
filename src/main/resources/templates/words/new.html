@@ -10,13 +10,25 @@
     <title>Language trainer</title>
 </head>
 <body class="center-table">
-<header class="header">
-    <a class="header_link" href="/">
-        <img src="/img/l-t.png" alt="lt">
-    </a>
-    <a class="header_link" href="/words">Список слов</a>
-</header>
 
+<header class="header">
+    <div class="left-section center">
+        <a class="header_link" href="/">
+            <img src="/img/l-t.png" alt="lt">
+        </a>
+        <a class="header_link" href="/words">Список слов</a>
+    </div>
+    <div class="right-section center">
+        <span th:if="${#authorization.expression('isAuthenticated()')}" class="guest-links">
+            <a class="header_link" th:text="${#authentication.name}" href="#"></a>
+            <a class="header_link" href="/logout">Выйти</a>
+        </span>
+        <span th:if="${#authorization.expression('isAnonymous()')}" class="guest-links">
+            <a class="header_link" href="/login">Вход</a>
+            <a class="header_link" href="/register">Регистрация</a>
+        </span>
+    </div>
+</header>
 
 <h1>Добавление нового слова</h1>
 <hr/>
@@ -27,5 +39,6 @@
     <input type="text" th:field="*{russian}" id="russian" placeholder="Russian" autocomplete="off">
     <input type="submit" value="Создать">
 </form>
+
 </body>
 </html>

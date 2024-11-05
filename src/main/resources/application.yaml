@@ -10,26 +10,22 @@ spring:
     username: kvshe
     password: La1sb3ktdeSOeOPsmrNYwsTwmPFN46gT
 
-# localhost
+    # localhost
 #    url: jdbc:postgresql://localhost:5432/language_trainer
 #    username: postgres
 #    password: 123
 
     # SpiceWeb
-  #    url: jdbc:postgresql://pg3.sweb.ru:5432/zheshelist
-  #    username: zheshelist
-  #    password: postQazwsx258794613
+#    url: jdbc:postgresql://pg3.sweb.ru:5432/zheshelist
+#    username: zheshelist
+#    password: postQazwsx258794613
 
   jpa:
+#    defer-datasource-initialization: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     hibernate:
       ddl-auto: update  # Или 'create', чтобы создать таблицы с нуля
-
-  #  jpa:
-  #    defer-datasource-initialization: true
-  #    hibernate:
-  #      ddl-auto: update
 
   sql:
     init:

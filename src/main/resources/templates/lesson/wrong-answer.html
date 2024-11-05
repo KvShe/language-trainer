@@ -10,17 +10,29 @@
     <title>Language trainer</title>
 </head>
 <body class="center-table">
+
 <audio autoplay>
     <source th:src="@{/sound/wrong-answer.mp3}" type="audio/mpeg">
 </audio>
 
 <header class="header">
-    <a class="header_link" href="/">
-        <img src="/img/l-t.png" alt="lt">
-    </a>
-    <a class="header_link" href="/words">Список слов</a>
+    <div class="left-section center">
+        <a class="header_link" href="/">
+            <img src="/img/l-t.png" alt="lt">
+        </a>
+        <a class="header_link" href="/words">Список слов</a>
+    </div>
+    <div class="right-section center">
+        <span th:if="${#authorization.expression('isAuthenticated()')}" class="guest-links">
+            <a class="header_link" th:text="${#authentication.name}" href="#"></a>
+            <a class="header_link" href="/logout">Выйти</a>
+        </span>
+        <span th:if="${#authorization.expression('isAnonymous()')}" class="guest-links">
+            <a class="header_link" href="/login">Вход</a>
+            <a class="header_link" href="/register">Регистрация</a>
+        </span>
+    </div>
 </header>
-
 
 <div class="progress-container">
     <div class="progress-bar" th:style="'width:' + ${progress} + '%'"></div>
@@ -28,29 +40,10 @@
 
 <h1>Language Trainer</h1>
 <hr/>
-<!--<form class="center_form" action="#" th:action="@{/learn/show}" th:object="${word}" method="get">-->
 <form class="content center" action="#" th:action="@{/lesson/show}" th:object="${word}" method="get">
-<!--    <p><label th:text="${word}"/></p>-->
     <p><label th:text="${word.russian} + ' - ' + ${word.english}"/></p>
     <p><input type="submit" value="Продолжить" autofocus></p>
 </form>
-
-
-<!--<form action="#" th:action="@{/learn}" th:object="${word}" method="post">-->
-<!--    <table>-->
-<!--        <tr>-->
-<!--            <td>-->
-<!--                <label for="english" th:text="${word.russian}"></label>-->
-<!--            </td>-->
-<!--            <td>-->
-<!--                <input type="text" th:field="*{english}" id="english" placeholder="Перевод" autofocus>-->
-<!--            </td>-->
-<!--            <td>-->
-<!--                <input type="submit" value="Проверить">-->
-<!--            </td>-->
-<!--        </tr>-->
-<!--    </table>-->
-<!--</form>-->
 
 </body>
 </html>

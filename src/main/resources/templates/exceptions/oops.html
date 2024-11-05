@@ -10,11 +10,24 @@
     <title>Language trainer</title>
 </head>
 <body class="center">
+
 <header class="header">
-    <a class="header_link" href="/">
-        <img src="/img/l-t.png" alt="lt">
-    </a>
-    <a class="header_link" href="/words">Список слов</a>
+    <div class="left-section center">
+        <a class="header_link" href="/">
+            <img src="/img/l-t.png" alt="lt">
+        </a>
+        <a class="header_link" href="/words">Список слов</a>
+    </div>
+    <div class="right-section center">
+        <span th:if="${#authorization.expression('isAuthenticated()')}" class="guest-links">
+            <a class="header_link" th:text="${#authentication.name}" href="#"></a>
+            <a class="header_link" href="/logout">Выйти</a>
+        </span>
+        <span th:if="${#authorization.expression('isAnonymous()')}" class="guest-links">
+            <a class="header_link" href="/login">Вход</a>
+            <a class="header_link" href="/register">Регистрация</a>
+        </span>
+    </div>
 </header>
 
 <h1>Что-то пошло не так</h1>
