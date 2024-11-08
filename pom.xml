@@ -12,7 +12,7 @@
 
     <groupId>ru.kvshe</groupId>
     <artifactId>language-trainer</artifactId>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
     <name>language-trainer</name>
     <description>language-trainer</description>
 
@@ -77,11 +77,16 @@
         </dependency>
 
         <!--test-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.boot</groupId>-->
-        <!--            <artifactId>spring-boot-starter-test</artifactId>-->
-        <!--            <scope>test</scope>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -99,15 +104,15 @@
                 </configuration>
             </plugin>
 
-            <!--Чтобы пропало сообщение об ошибке-->
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-surefire-plugin</artifactId>-->
-            <!--                <version>${maven-surefire-plugin.version}</version>-->
-            <!--                <configuration>-->
-            <!--                    <argLine>-XX:+EnableDynamicAgentLoading</argLine>-->
-            <!--                </configuration>-->
-            <!--            </plugin>-->
+<!--Чтобы пропало сообщение об ошибке-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-surefire-plugin</artifactId>-->
+<!--                <version>${maven-surefire-plugin.version}</version>-->
+<!--                <configuration>-->
+<!--                    <argLine>-XX:+EnableDynamicAgentLoading</argLine>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 

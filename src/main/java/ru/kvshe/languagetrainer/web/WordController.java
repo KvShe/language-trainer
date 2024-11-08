@@ -41,16 +41,13 @@ public class WordController {
         String login = userService.getLoginCurrentUser();
         User user = userService.getUserByLogin(login);
         List<Word> words = wordService.getAllFor(user.getId());
-//        List<Word> words = wordService.getAll();
 
         if (sort != null && sort.equals("english")) {
-//            wordService.sortByEnglish(words);
             wordService.setSortStrategy(new EnglishSortStrategy());
             wordService.sortWords(words);
         }
 
         if (sort != null && sort.equals("russian")) {
-//            wordService.sortByRussian(words);
             wordService.setSortStrategy(new RussianSortStrategy());
             wordService.sortWords(words);
         }

@@ -100,7 +100,8 @@ public class WordService {
     }
 
     /**
-     * @return
+     * Метод возвращает список слов, которые текущим пользователем не использовались более указанного времени (days)
+     * @return список слов, которые пользователем с id не использовались в течении days
      */
     public List<Word> getForgottenWords() {
         Long id = userService.getCurrentUser().getId();
