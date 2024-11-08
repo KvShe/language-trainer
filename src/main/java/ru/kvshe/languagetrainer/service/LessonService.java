@@ -10,6 +10,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Сервис для управления уроками. Реализует интерфейс {@link LessonObserver}, чтобы отслеживать статистику прохождения уроков.
+ * Этот сервис управляет списками слов для урока, проверяет правильность ответов, обновляет данные о словах в базе данных и рассчитывает прогресс.
+ */
 @Service
 @Getter
 @Setter
@@ -19,21 +23,42 @@ public class LessonService implements LessonObserver {
     private List<Word> words = new ArrayList<>();
     private List<Word> wordsToUpdateInDatabase = new ArrayList<>();
 
-    // variables for LessonObserver
+    /**
+     * variables for LessonObserver
+     * Переменные для отслеживания статистики правильных и неправильных ответов
+     */
     private int correctAnswers;
     private int wrongAnswers;
     private int quantity; // количество слов в загруженном уроке
 
+    /**
+     * Создаёт список случайных слов для урока.
+     *
+     * @return список случайных слов
+     */
     public List<Word> createListOfRandomWords() {
         words = wordService.getRandomWords();
         return words;
     }
 
+    /**
+     * Создаёт список забытых слов (не использовавшихся определённое время).
+     *
+     * @return список забытых слов
+     */
     public List<Word> getForgottenWords() {
         words = wordService.getForgottenWords();
         return words;
     }
 
+    /**
+     * Проверяет слово пользователя на соответствие с текущим словом из урока.
+     * Если слово правильное, обновляется дата последнего использования слова.
+     * Если слово неправильное, оно добавляется обратно в список.
+     *
+     * @param word слово, которое пользователь ввёл
+     * @return true, если слово верное, иначе false
+     */
     public boolean checkWord(Word word) {
         // Сравнивает строки english
         boolean result = clearAwayDebris(word).getEnglish().equals(words.getFirst().getEnglish().toLowerCase());
@@ -52,7 +77,7 @@ public class LessonService implements LessonObserver {
     }
 
     /**
-     * Обновляет у проверяемых слов поле lastUsed
+     * Обновляет поле lastUsed у проверенных слов в базе данных.
      */
     public void updateWords() {
         wordService.updateWordsData(wordsToUpdateInDatabase);
@@ -60,10 +85,10 @@ public class LessonService implements LessonObserver {
     }
 
     /**
-     * Переводит значение поля english в нижний регистр, убирает все символы, кроме латиницы
+     * Преобразует значение поля english в нижний регистр и убирает все символы, кроме латиницы.
      *
-     * @param word слово со значениями, полученными от пользователя
-     * @return слово с полем english в нижнем регистре и состоящее только из латиницы
+     * @param word слово, которое необходимо обработать
+     * @return обработанное слово с английскими символами в нижнем регистре
      */
     private Word clearAwayDebris(Word word) {
         word.setEnglish(
@@ -98,10 +123,10 @@ public class LessonService implements LessonObserver {
     }
 
     /**
-     * Метод возвращает процент прогресса прохождения урока
+     * Вычисляет процент прогресса прохождения урока на основе количества оставшихся слов.
      *
-     * @param quantityWords количество слов, которые осталось проверить
-     * @return процент прогресса прохождения урока
+     * @param quantityWords количество слов, которые ещё нужно проверить
+     * @return процент прогресса урока
      */
     @Override
     public int getProgressPercentage(int quantityWords) {

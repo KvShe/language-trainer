@@ -14,6 +14,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Сервис для работы со словами. Позволяет взаимодействовать с базой данных для получения, сохранения, обновления, удаления слов, а также выполнения сортировки и обновления поля lastUsed для слов.
+ */
 @Service
 @Getter
 @Setter
@@ -26,14 +29,30 @@ public class WordService {
     private int quantity = 10; // количество слов в одном уроке
     private int days = 2;
 
+    /**
+     * Получает все слова из базы данных.
+     *
+     * @return список всех слов
+     */
     public List<Word> getAll() {
         return wordRepository.findAll();
     }
 
+    /**
+     * Получает все слова для пользователя по его идентификатору.
+     *
+     * @param userId идентификатор пользователя
+     * @return список всех слов для данного пользователя
+     */
     public List<Word> getAllFor(Long userId) {
         return wordRepository.findAllByUserId(userId);
     }
 
+    /**
+     * Выполняет сортировку списка слов, используя установленную стратегию сортировки.
+     *
+     * @param words список слов для сортировки
+     */
     public void sortWords(List<Word> words) {
         sortStrategy.sort(words);
     }
@@ -101,6 +120,7 @@ public class WordService {
 
     /**
      * Метод возвращает список слов, которые текущим пользователем не использовались более указанного времени (days)
+     *
      * @return список слов, которые пользователем с id не использовались в течении days
      */
     public List<Word> getForgottenWords() {

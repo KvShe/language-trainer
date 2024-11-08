@@ -3,6 +3,10 @@ package ru.kvshe.languagetrainer.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * Перечисление ролей пользователей в системе.
+ * Каждая роль определяет уровень доступа пользователя.
+ */
 @Getter
 @AllArgsConstructor
 public enum Role {

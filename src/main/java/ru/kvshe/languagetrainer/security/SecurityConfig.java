@@ -9,14 +9,31 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * Конфигурация безопасности веб-приложения.
+ * Обеспечивает настройку безопасности через Spring Security.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    /**
+     * Бин для кодирования паролей с использованием алгоритма BCrypt.
+     *
+     * @return экземпляр BCryptPasswordEncoder для кодирования паролей
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Настройка фильтров безопасности для приложения.
+     * Определяет доступ к различным ресурсам и конфигурацию форм входа и выхода.
+     *
+     * @param http объект конфигурации безопасности
+     * @return настроенный SecurityFilterChain
+     * @throws Exception если происходит ошибка в конфигурации безопасности
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -46,7 +63,6 @@ public class SecurityConfig {
                 })
 
                 .logout(request -> {
-//                    request.logoutUrl("/logout"); // url для запроса выхода
                     request.logoutSuccessUrl("/"); // url для перенаправления после успешного выхода
                 })
 

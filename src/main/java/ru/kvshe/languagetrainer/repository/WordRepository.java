@@ -10,6 +10,10 @@ import ru.kvshe.languagetrainer.model.Word;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Репозиторий для работы с сущностью `Word`.
+ * Содержит методы для поиска, обновления и подсчета слов пользователя.
+ */
 @Repository
 public interface WordRepository extends JpaRepository<Word, Long> {
     /**
@@ -22,35 +26,26 @@ public interface WordRepository extends JpaRepository<Word, Long> {
     @Query(value = "select * from word where user_id = :userId order by random() limit :quantity", nativeQuery = true)
     List<Word> findRandomWordsForUserId(@Param("userId") Long userId, @Param("quantity") int quantity);
 
-//    @Query(value = "select * from word where last_used < now() - interval '5 days' order by random() limit :quantity", nativeQuery = true)
-//    List<Word> findRandomWordsNotUsedInLastFiveDays(@Param("quantity") int quantity);
-
     /**
      * Возвращает список слов, которые не использовались более заданного времени
      *
-     * @param userId идентификатор пользователя
+     * @param userId   идентификатор пользователя
      * @param quantity количество записей, которые метод вернёт
      * @param days     число дней, если поле las_used отличается от текущей даты на большее количество, то эта запись будет возвращена
      * @return список слов, которые не проверялись более days
      */
     @Query(value = "select * from word where user_id = :userId and last_used < now() - cast(:days || ' days' as interval) order by random() limit :quantity", nativeQuery = true)
     List<Word> findRandomWordsNotUsedInLastDaysForUser(@Param("userId") Long userId, @Param("quantity") int quantity, @Param("days") int days);
-//    @Query(value = "select * from word where last_used < now() - cast(:days || ' days' as interval) order by random() limit :quantity", nativeQuery = true)
-//    List<Word> findRandomWordsNotUsedInLastDays(@Param("quantity") int quantity, @Param("days") int days);
 
     /**
      * Метод количество слов, которые не использовались более days для user с id - userId
+     *
      * @param userId идентификатор пользователя
-     * @param days число дней, если поле las_used отличается от текущей даты на большее количество, то эта запись будет возвращена
+     * @param days   число дней, если поле las_used отличается от текущей даты на большее количество, то эта запись будет возвращена
      * @return количество слов, которые не использовались более указанного количества дней
      */
     @Query(value = "select count(*) from word where user_id = :userId and last_used < now() - cast(:days || ' days' as interval)", nativeQuery = true)
     int countWordsNotUsedInLastDaysForUser(@Param("userId") Long userId, @Param("days") int days);
-
-
-//    @Modifying
-//    @Query("update Word set Word.lastUsed = :data")
-//    void updateAllWordsData(@Param("data") LocalDate data);
 
     /**
      * Обновляет у записей поле lastUsed
@@ -62,7 +57,11 @@ public interface WordRepository extends JpaRepository<Word, Long> {
     @Query("update Word w set w.lastUsed = :dateUse where w.id in :ids")
     void updateWordsTextByIds(@Param("dateUse") LocalDate dateUse, @Param("ids") List<Long> ids);
 
-    //    @Modifying
-//    @Query("select * from Word where Word.userId = :userId")
+    /**
+     * Ищет все слова по идентификатору пользователя.
+     *
+     * @param userId идентификатор пользователя
+     * @return список всех слов, связанных с пользователем
+     */
     List<Word> findAllByUserId(Long userId);
 }
