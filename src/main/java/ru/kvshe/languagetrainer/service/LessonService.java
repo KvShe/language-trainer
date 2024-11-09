@@ -8,7 +8,9 @@ import ru.kvshe.languagetrainer.model.Word;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Сервис для управления уроками. Реализует интерфейс {@link LessonObserver}, чтобы отслеживать статистику прохождения уроков.
@@ -20,11 +22,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LessonService implements LessonObserver {
     private final WordService wordService;
-    private List<Word> words = new ArrayList<>();
+    private final UserService userService;
+
+    private Map<Long, List<Word>> wordsMap = new HashMap<>();
+//    private List<Word> words = new ArrayList<>();
     private List<Word> wordsToUpdateInDatabase = new ArrayList<>();
 
     /**
-     * variables for LessonObserver
+     * variables for LessonObserver<br/>
      * Переменные для отслеживания статистики правильных и неправильных ответов
      */
     private int correctAnswers;
@@ -37,7 +42,11 @@ public class LessonService implements LessonObserver {
      * @return список случайных слов
      */
     public List<Word> createListOfRandomWords() {
-        words = wordService.getRandomWords();
+        Long userId = userService.getCurrentUser().getId();
+        List<Word> words = wordService.getRandomWords();
+
+        wordsMap.put(userId, words);
+
         return words;
     }
 
@@ -47,7 +56,11 @@ public class LessonService implements LessonObserver {
      * @return список забытых слов
      */
     public List<Word> getForgottenWords() {
-        words = wordService.getForgottenWords();
+        List<Word> words = wordService.getForgottenWords();
+        Long userId = userService.getCurrentUser().getId();
+
+        wordsMap.put(userId, words);
+
         return words;
     }
 
@@ -61,6 +74,9 @@ public class LessonService implements LessonObserver {
      */
     public boolean checkWord(Word word) {
         // Сравнивает строки english
+        Long userId = userService.getCurrentUser().getId();
+        List<Word> words = wordsMap.get(userId);
+
         boolean result = clearAwayDebris(word).getEnglish().equals(words.getFirst().getEnglish().toLowerCase());
 
         word = words.getFirst();
@@ -130,6 +146,8 @@ public class LessonService implements LessonObserver {
      */
     @Override
     public int getProgressPercentage(int quantityWords) {
+        List<Word> words = wordsMap.get(userService.getCurrentUser().getId());
+
         int progress = (int) (words.size() * 100f / quantity);
         return 100 - progress;
     }

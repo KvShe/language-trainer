@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ru.kvshe.languagetrainer.model.Word;
 import ru.kvshe.languagetrainer.service.LessonService;
+import ru.kvshe.languagetrainer.service.UserService;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,13 +20,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LessonController {
     private final LessonService lessonService;
+    private final UserService userService;
 
     @Operation(
             summary = "Получить список слов",
             description = "Формирует список слов для обучения и возвращает страницу с проверкой первого слова")
     @GetMapping
     public ModelAndView lesson(Word word) {
-        List<Word> words = lessonService.createListOfRandomWords();// todo создавать список слов, которые давно не проверялись
+        List<Word> words = lessonService.createListOfRandomWords();
         lessonService.setQuantity(words.size());
 
         if (words.isEmpty()) {
@@ -63,10 +65,14 @@ public class LessonController {
                     """)
     @GetMapping("/show")
     public ModelAndView lessonShow(Word word) {
-        List<Word> words = lessonService.getWords();
+//        List<Word> words = lessonService.getWords();
+
+        List<Word> words = lessonService.getWordsMap().get(userService.getCurrentUser().getId());
+
 
         if (!words.isEmpty()) {
-            word.setRussian(lessonService.getWords().getFirst().getRussian());
+//            word.setRussian(lessonService.getWords().getFirst().getRussian());
+            word.setRussian(words.getFirst().getRussian());
             return new ModelAndView("lesson/show")
                     .addObject("word", word)
                     .addObject("progress", lessonService.getProgressPercentage(words.size()));
@@ -101,7 +107,8 @@ public class LessonController {
             description = "Возвращает страницу, сообщающую о неверном переводе слова: wrong-answer.html")
     @GetMapping("/wrong-answer")
     public ModelAndView translationWrongAnswer() {
-        List<Word> words = lessonService.getWords();
+//        List<Word> words = lessonService.getWords();
+        List<Word> words = lessonService.getWordsMap().get(userService.getCurrentUser().getId());
         Word word = words.getLast();
         return new ModelAndView("lesson/wrong-answer", "word", word)
                 .addObject("progress", lessonService.getProgressPercentage(words.size()));
@@ -112,7 +119,8 @@ public class LessonController {
             description = "Возвращает страницу, сообщающую о верном переводе слова: correct-answer.html")
     @GetMapping("/correct-answer")
     public ModelAndView translationCorrectAnswer() {
-        List<Word> words = lessonService.getWords();
+//        List<Word> words = lessonService.getWords();
+        List<Word> words = lessonService.getWordsMap().get(userService.getCurrentUser().getId());
         return new ModelAndView("lesson/correct-answer", "word", "Верно!")
                 .addObject("progress", lessonService.getProgressPercentage(words.size()));
     }
