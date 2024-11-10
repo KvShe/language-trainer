@@ -27,6 +27,7 @@ public class AuthController {
     @PostMapping("/register")
     @Operation(summary = "Создать нового пользователя", description = "Сохраняет нового пользователя и перенаправляет на страницу входа.")
     public ModelAndView createNewUser(@ModelAttribute("user") User user) {
+        System.out.println(user);
         userService.save(user);
         return new ModelAndView("redirect:/login");
     }

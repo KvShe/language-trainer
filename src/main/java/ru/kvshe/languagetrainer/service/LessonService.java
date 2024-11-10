@@ -25,13 +25,13 @@ public class LessonService implements LessonObserver {
     private final UserService userService;
 
     private Map<Long, List<Word>> wordsMap = new HashMap<>();
-//    private List<Word> words = new ArrayList<>();
     private List<Word> wordsToUpdateInDatabase = new ArrayList<>();
 
     /**
      * variables for LessonObserver<br/>
      * Переменные для отслеживания статистики правильных и неправильных ответов
      */
+    private Map<Long, List<Integer>> progerssMap = LessonObserver.progressMap;
     private int correctAnswers;
     private int wrongAnswers;
     private int quantity; // количество слов в загруженном уроке

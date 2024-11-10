@@ -20,4 +20,9 @@ public class User {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Override
+    public String toString() {
+        return id + " " + login + " " + password + " " + role;
+    }
 }
