@@ -91,6 +91,8 @@ public class WordService {
 
     public Word update(Long id, Word word) {
         word.setId(id);
+        word.setUserId(userService.getCurrentUser().getId());
+        word.setLastUsed(LocalDate.now());
         return wordRepository.save(word);
     }
 

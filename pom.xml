@@ -6,13 +6,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.5</version>
+        <version>3.4.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>ru.kvshe</groupId>
     <artifactId>language-trainer</artifactId>
-    <version>1.0.9</version>
+    <version>1.0.10</version>
     <name>language-trainer</name>
     <description>language-trainer</description>
 
