@@ -4,24 +4,9 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    # render
-#    url: jdbc:postgresql://dpg-csiufn68ii6s73cromu0-a:5432/kvshe # для внутреннего соединения
-#    url: jdbc:postgresql://dpg-csiufn68ii6s73cromu0-a.frankfurt-postgres.render.com:5432/kvshe # для внешнего соединения
-#    username: kvshe
-#    password: La1sb3ktdeSOeOPsmrNYwsTwmPFN46gT
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-
-    # localhost
-#    url: jdbc:postgresql://localhost:5432/language_trainer
-#    username: postgres
-#    password: 123
-
-    # SpiceWeb
-#    url: jdbc:postgresql://pg3.sweb.ru:5432/zheshelist
-#    username: zheshelist
-#    password: postQazwsx258794613
+    url: jdbc:postgresql://pg3.sweb.ru:5432/zheshelist
+    username: zheshelist
+    password: postQazwsx258794613
 
   jpa:
 #    defer-datasource-initialization: true

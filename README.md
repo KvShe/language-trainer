@@ -23,10 +23,7 @@
     - add забытые слова
         - если слов нет - кнопка не активна
         - если слова есть - рядом с кнопкой появляется цифра
-- added postgreSQL:
-    - localhost
-    - SpaceWeb
-    - render
+- added postgreSQL
 - added логирование в консоль через Spring AOP & Lombok
     - WordService
 - added таймер для измерения времени выполнения метода
@@ -46,11 +43,9 @@
     - add logback - библиотека для логирования
 - add validator (hibernate, jacarta) - ограничение на вводимое слово по длине символов (255)
 - add words:
-    - accept - принимать
     - everything - всё
     - invoke - вызывать
     - scope - рамки (зона видимости)
-    - lazy - ленивый
     - whose - чей
     - from - от, из, с
     - to - к, в, до
